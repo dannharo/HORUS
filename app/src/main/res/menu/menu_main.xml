@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MapaActivity">
 
-<item android:id="@+id/action_settings"
-    android:title="Configuraciones"
-    android:orderInCategory="100"
-    app:showAsAction = "never" />
+    <item android:id="@+id/admin" android:title="@string/item1"></item>
+    <item android:id="@+id/pass" android:title="@string/item2"></item>
+    <item android:id="@+id/armado" android:title="@string/item3"></item>
+    <item android:id="@+id/alarma" android:title="@string/item4"></item>
+    <item android:id="@+id/reiniciar" android:title="@string/item5"></item>
 </menu>

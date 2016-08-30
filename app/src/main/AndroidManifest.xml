@@ -16,7 +16,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".DispositivoActivity" />
-        <activity android:name=".MapaActivity"></activity>
+        <activity android:name=".MapaActivity" />
+        <activity android:name=".ContrasenaActivity" />
+        <activity android:name=".AdministradorActivity"></activity>
+        <activity android:name=".PopAlarma" android:theme="@style/AppTheme.CustomTheme"></activity>
     </application>
 
 </manifest>
