@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     ImageButton floatButton;
     //Array que contiene los dispositivos dados de alta
-    String[] dispositivosArray = {"Dipositivo 1", "Dispositivo de prueba"};
+    String[] dispositivosArray = {"Dipositivo 1", "Dispositivo de prueba","mapa"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 //Obtiene el nombre del elemento seleccionado
                 String data = (String) listView.getAdapter().getItem(position);
                 //Se define el intent, indica a la clase a la que se pasara la informacion
-                Intent intent = new Intent(MainActivity.this, MapaActivity.class);
+                Intent intent = new Intent(MainActivity.this, MapAct.class);
                 intent.putExtra("idDispositivo", data);
                 startActivity(intent);
 

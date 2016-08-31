@@ -5,4 +5,5 @@
     <string name="item3">Armado</string>
     <string name="item4">Alarmas</string>
     <string name="item5">Reiniciar</string>
+    <string name="title_activity_map">Map</string>
 </resources>
