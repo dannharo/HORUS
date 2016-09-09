@@ -1,8 +1,12 @@
 package com.app.mobi.horus;
-
+import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -10,9 +14,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapAct extends FragmentActivity implements OnMapReadyCallback {
+public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+
+    Mensaje sms = new Mensaje();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +30,45 @@ public class MapAct extends FragmentActivity implements OnMapReadyCallback {
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        //Inflate the menu; this adds items to the action bar if it is present
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return  true;
+    }
+    //Depende la opciòn seleccionada en el menu, se ejecturà una determinada actividad
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
 
+        if (id == R.id.admin) {
+            Intent intent1 = new Intent(this,AdministradorActivity.class);
+            this.startActivity(intent1);
+            return true;
+        }
+        if (id == R.id.pass) {
+            Intent intent2 = new Intent(this,ContrasenaActivity.class);
+            this.startActivity(intent2);
+            return true;
+        }
+        if (id == R.id.armado) {
+            sms.enviarMensaje("h", "K");
+            Toast.makeText(this, "Armar dispositivo", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        if (id == R.id.alarma) {
+            Intent intent4 = new Intent(this,PopAlarma.class);
+            this.startActivity(intent4);
+            return true;
+        }
+        if (id == R.id.reiniciar) {
+            Toast.makeText(this, "Reiniciar dispositivo", Toast.LENGTH_LONG).show();
+            return true;
+        }
 
+        return super.onOptionsItemSelected(item);
+    }
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.

@@ -4,6 +4,7 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton floatButton;
     //Array que contiene los dispositivos dados de alta
     String[] dispositivosArray = {"Dipositivo 1", "Dispositivo de prueba","mapa"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
