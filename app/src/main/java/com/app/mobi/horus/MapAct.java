@@ -18,8 +18,11 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
-    Mensaje sms = new Mensaje();
-
+    Mensaje sms = new Mensaje(this);
+    //Declaraciòn de variables
+    String contraseña ="123456";
+    String mensaje;
+    String noTelefono = "3121105454";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +56,8 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
             return true;
         }
         if (id == R.id.armado) {
-            sms.enviarMensaje("h", "K");
+            mensaje = "arm"+contraseña;
+            sms.enviarMensaje(noTelefono, mensaje);
             Toast.makeText(this, "Armar dispositivo", Toast.LENGTH_LONG).show();
             return true;
         }

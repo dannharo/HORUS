@@ -1,7 +1,14 @@
 package com.app.mobi.horus;
 
+import android.Manifest;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.telephony.SmsManager;
+import android.widget.TextView;
 import android.widget.Toast;
 /**
  * Created by rosario on 09/09/2016.
@@ -10,23 +17,22 @@ import android.widget.Toast;
  */
 public class Mensaje {
 
-    /*static Context c;
+    static Context c;
     public Mensaje(Context context)
     {
         c= context;
-    }*/
+    }
     public static void enviarMensaje(String telefono, String Mensaje)
     {
-         String phoneNumber = "3121105454";
-        String message = "Hola, esto es una prueba";
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(
-                phoneNumber,
+                telefono,
                 null,
-                message,
+                Mensaje,
                 null,
                 null);
 
-        //Toast.makeText(c, "Mensaje enviado correctamente", Toast.LENGTH_LONG).show();
+        Toast.makeText(c, "Mensaje enviado correctamente", Toast.LENGTH_LONG).show();
     }
+
 }
