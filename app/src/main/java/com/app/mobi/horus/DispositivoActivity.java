@@ -1,9 +1,11 @@
 package com.app.mobi.horus;
 
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
-public class DispositivoActivity extends AppCompatActivity {
+public class DispositivoActivity extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
