@@ -37,11 +37,6 @@ String idDispositivo;
             this.startActivity(intent1);
             return true;
         }
-        if (id == R.id.pass) {
-            Intent intent2 = new Intent(this,ContrasenaActivity.class);
-            this.startActivity(intent2);
-            return true;
-        }
         if (id == R.id.armado) {
             Toast.makeText(this, "Armar dispositivo", Toast.LENGTH_LONG).show();
             return true;

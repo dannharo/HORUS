@@ -118,9 +118,8 @@ public class HorusDB extends SQLiteOpenHelper {
     }
 public Cursor obtenerDispositivos(){
         SQLiteDatabase db = this.getReadableDatabase();
-        String[] projection = {T_D_ID,T_D_NOMBRE};
-        Cursor cursor = db.rawQuery("SELECT "+T_U_ID+", "+T_D_NOMBRE+" FROM "+TABLA_DISPOSITIVOS,null);
-        return cursor;
+        Cursor cursor1 = db.rawQuery("SELECT "+T_U_ID+", "+T_D_NOMBRE+" FROM "+TABLA_DISPOSITIVOS,null);
+        return cursor1;
 
     }
 
