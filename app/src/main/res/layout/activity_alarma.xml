@@ -13,16 +13,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Alarma batería"
-        android:id="@+id/textView3"
-        android:layout_below="@+id/toggleAlarmMov"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="53dp" />
-
     <ToggleButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,4 +31,14 @@
         android:layout_alignLeft="@+id/toggleAlarmMov"
         android:layout_alignStart="@+id/toggleAlarmMov"
         android:layout_marginTop="29dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Alarma batería"
+        android:id="@+id/textView3"
+        android:layout_marginTop="54dp"
+        android:layout_below="@+id/toggleAlarmMov"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
