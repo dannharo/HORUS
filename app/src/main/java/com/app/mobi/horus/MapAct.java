@@ -46,13 +46,8 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
         int id = item.getItemId();
 
         if (id == R.id.admin) {
-            Intent intent1 = new Intent(this,AdministradorActivity.class);
+            Intent intent1 = new Intent(this,ListAdminActivity.class);
             this.startActivity(intent1);
-            return true;
-        }
-        if (id == R.id.pass) {
-            Intent intent2 = new Intent(this,ContrasenaActivity.class);
-            this.startActivity(intent2);
             return true;
         }
         if (id == R.id.armado) {
