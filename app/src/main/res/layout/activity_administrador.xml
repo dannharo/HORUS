@@ -45,6 +45,7 @@
         android:layout_height="wrap_content"
         android:text="Número de teléfono:"
         android:id="@+id/textTelAdmin"
+        android:inputType="phone"
         android:layout_below="@+id/editNombreAdmin"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

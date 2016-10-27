@@ -1,11 +1,15 @@
 package com.app.mobi.horus;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.SmsMessage;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -24,6 +28,8 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
     String mensaje;
     String noTelefono = "3121105454";
 
+    BroadcastReceiver receiver = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +38,42 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        //Leer mensaje
+        IntentFilter filter = new IntentFilter("android.provider.Telephony.SMS_RECEIVED");
+        receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context arr0, Intent arr1) {
+                processReceive(arr0, arr1);
+            }
+        };
+        registerReceiver(receiver, filter);
     }
+    //Funciones para recibir mensaje de texto
+    protected void onDestroy(){
+        super.onDestroy();
+        unregisterReceiver(receiver);
+    }
+    public void processReceive(Context context, Intent intent)
+    {
+
+        //TextView lbs = (TextView)findViewById(R.id.textView3);
+        Bundle bundle = intent.getExtras();
+        Object[] objArr =(Object[])bundle.get("pdus");
+        String sms = "";
+
+        for(int i= 0; i<objArr.length; i++)
+        {
+            SmsMessage smsMsg = SmsMessage.createFromPdu((byte[])objArr[i]);
+            String smsBody = smsMsg.getMessageBody();
+            String senderNumber = smsMsg.getDisplayOriginatingAddress();
+            sms+="From : "+senderNumber+ "\ncontent: "+ smsBody;
+        }
+        Toast.makeText(context, sms, Toast.LENGTH_LONG).show();
+        //lbs.setText(sms);
+    }
+
+    //Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -53,7 +94,7 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
         if (id == R.id.armado) {
             mensaje = "arm"+contraseña;
             sms.enviarMensaje(noTelefono, mensaje);
-            Toast.makeText(this, "Armar dispositivo", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "Armar dispositivo", Toast.LENGTH_LONG).show();
             return true;
         }
         if (id == R.id.alarma) {
@@ -62,7 +103,9 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
             return true;
         }
         if (id == R.id.reiniciar) {
-            Toast.makeText(this, "Reiniciar dispositivo", Toast.LENGTH_LONG).show();
+            mensaje = "reset"+contraseña;
+            sms.enviarMensaje(noTelefono, mensaje);
+            //Toast.makeText(this, "Reiniciar dispositivo", Toast.LENGTH_LONG).show();
             return true;
         }
 

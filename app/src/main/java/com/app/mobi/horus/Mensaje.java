@@ -42,7 +42,7 @@ public class Mensaje extends AppCompatActivity {
             //Log.d("PLAYGROUND", "Permission is not granted, requesting");
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 123);
         } else {
-            Toast.makeText(c, "Permission is not granted", Toast.LENGTH_LONG).show();
+            Toast.makeText(c, "Permission is  granted", Toast.LENGTH_LONG).show();
         }
     }
 
