@@ -6,53 +6,55 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-/**
- * Created by danielorlandoharolozano on 12/09/16.
- */
 public class HorusDB extends SQLiteOpenHelper {
-    public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "horus_devices.db";
-
-    //TABLA DE DISPOSITIVOS
+    // tables names
     public static final String TABLA_DISPOSITIVOS  = "DISPOSITIVOS";
-    public static final String T_D_ID  = "ID";
+    public static final String TABLA_USUARIOS = "USUARIOS";
+    public static final String TABLA_ADMON = "ADMINISTRADORES";
+
+    // tables columns
+    //TABLA DE DISPOSITIVOS
+    public static final String T_D_ID  = "_id";
     public static final String T_D_NOMBRE  = "NOMBRE";
     public static final String T_D_NUMERO  = "NUMERO";
+    public static final String T_D_PASSWORD  = "PASSWORD";
     public static final String T_D_LATITUD  = "LATITUD";
     public static final String T_D_LONGITUD  = "LONGITUD";
-    public static final String T_D_ACTUALIZACION  = "ULTIMA_ACTUALIZACION";
-
     //TABLA USUARIOS
-    public static final String TABLA_USUARIOS = "USUARIOS";
-    public static final String T_U_ID = "ID";
+    public static final String T_U_ID = "_id";
     public static final String T_U_USUARIO = "USUARIO";
     public static final String T_U_NOMBRE = "NOMBRE";
     public static final String T_U_PASSWORD = "PASSWORD";
-
     //TABLA ADMINISTRADORES
-    public static final String TABLA_ADMON = "ADMINISTRADORES";
-    public static final String T_A_ID = "ID";
+    public static final String T_A_ID = "_id";
     public static final String T_A_ID_DISPOSITIVO = "ID_DISPOSITIVO";
     public static final String T_A_NOMBRE = "NOMBRE";
     public static final String T_A_NUMERO = "NUMERO";
 
-    // VARIABLES PARA LAS TABLAS
+    // Database Information
+    public static final String DATABASE_NAME = "horus_devices.db";
+
+    // Database Version
+    public static final int DATABASE_VERSION = 3;
+
+    // Creating tables query
     private static final String SQL_TABLA_DISPOSITIVOS = "create table "
             +TABLA_DISPOSITIVOS+ "("
-            +T_D_ID+" integer primary key, "
+            +T_D_ID+" integer primary key autoincrement, "
             +T_D_NOMBRE+" text, "
             +T_D_NUMERO+" text not null, "
+            +T_D_PASSWORD+" text, "
             +T_D_LATITUD+" real, "
             +T_D_LONGITUD+" real "
             +");";
- private static final String SQL_TABLA_USUARIOS = "create table "
+    private static final String SQL_TABLA_USUARIOS = "create table "
             +TABLA_USUARIOS+ "("
             +T_U_ID+" integer primary key autoincrement, "
             +T_U_USUARIO+" text not null, "
             +T_U_PASSWORD+" text not null, "
             +T_U_NOMBRE+" text not null "
             +");";
- private static final String SQL_TABLA_ADMON = "create table "
+    private static final String SQL_TABLA_ADMON = "create table "
             +TABLA_ADMON+ "("
             +T_A_ID+" integer primary key autoincrement, "
             +T_A_ID_DISPOSITIVO+" integer, "
@@ -61,16 +63,19 @@ public class HorusDB extends SQLiteOpenHelper {
             +");";
 
     public HorusDB(Context context){
-
         super(context, DATABASE_NAME,null,DATABASE_VERSION);
     }
+
     public void onCreate(SQLiteDatabase db){
         db.execSQL(SQL_TABLA_DISPOSITIVOS);
         db.execSQL(SQL_TABLA_USUARIOS);
         db.execSQL(SQL_TABLA_ADMON);
     }
     public void onUpgrade(SQLiteDatabase db,int oldVersion, int newVersion){
-
+        db.execSQL("DROP TABLE IF EXISTS "+TABLA_DISPOSITIVOS);
+        db.execSQL("DROP TABLE IF EXISTS "+TABLA_ADMON);
+        db.execSQL("DROP TABLE IF EXISTS "+TABLA_USUARIOS);
+        onCreate(db);
     }
     public void agregarDispositivo(String id, String nombre, String  numero, double latitud, double longitud){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -116,7 +121,7 @@ public class HorusDB extends SQLiteOpenHelper {
         }
 
     }
-public Cursor obtenerDispositivos(){
+    public Cursor obtenerDispositivos(){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor1 = db.rawQuery("SELECT "+T_U_ID+", "+T_D_NOMBRE+" FROM "+TABLA_DISPOSITIVOS,null);
         return cursor1;
