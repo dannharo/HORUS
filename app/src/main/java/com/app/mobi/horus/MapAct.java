@@ -11,11 +11,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.server.converter.StringToIntConverter;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
@@ -25,15 +28,22 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
     Mensaje sms = new Mensaje(this);
     //Declaraciòn de variables
     String contraseña ="123456";
-    String mensaje;
-    String noTelefono = "3121105454";
-
+    String mensaje="";
+    String noTelefono = "3121884228";
+    String latitud="";
+    String longitud= "";
     BroadcastReceiver receiver = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
+        //El mensaje se conforma de la sig forma: fix030s(obtener en 30 segundos la posicion)+001n
+        // (numero de veces que se quiere obtener la posicion cada 30segunds)+contraseña
+        mensaje = "fix030s001n"+contraseña;
+        //Se manda mensaje para obtener la ubicación del gps
+        sms.enviarMensaje(noTelefono, mensaje);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -61,15 +71,30 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
         Bundle bundle = intent.getExtras();
         Object[] objArr =(Object[])bundle.get("pdus");
         String sms = "";
+        String smsBody ="";
+        String originNumber = "";
 
         for(int i= 0; i<objArr.length; i++)
         {
             SmsMessage smsMsg = SmsMessage.createFromPdu((byte[])objArr[i]);
-            String smsBody = smsMsg.getMessageBody();
-            String senderNumber = smsMsg.getDisplayOriginatingAddress();
-            sms+="From : "+senderNumber+ "\ncontent: "+ smsBody;
+            smsBody = smsMsg.getMessageBody();
+            originNumber = smsMsg.getDisplayOriginatingAddress();
+
         }
-        Toast.makeText(context, sms, Toast.LENGTH_LONG).show();
+        if (originNumber.equals(noTelefono)) {
+            //Separamos la cadena para obtener la latitud y longitud
+            String[] infoUbicacion = smsBody.split(":");
+            latitud = (infoUbicacion[1].replace("long", "")).trim();
+            longitud= (infoUbicacion[2].replace("speed", "")).trim();
+            sms = latitud + ", "+longitud;
+            Toast.makeText(context, sms, Toast.LENGTH_LONG).show();
+            MarkerOptions a = new MarkerOptions()
+                    .position(new LatLng(19.255000, -103.735714));
+            Marker m = mMap.addMarker(a);
+            m.setPosition(new LatLng(19.255000, -103.735714));
+            //sms += "From : " + originNumber + "\ncontent: " + smsBody;
+        }
+
         //lbs.setText(sms);
     }
 
