@@ -7,6 +7,9 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.content.Intent;
+
+import java.sql.SQLException;
 
 public class DispositivoActivity extends AppCompatActivity {
 
@@ -14,7 +17,7 @@ public class DispositivoActivity extends AppCompatActivity {
     //Declaración de variables
     String contraseña, noTelGps;
     String mensaje;
-
+    private DBManager dbmanager;
     EditText nombreDisp, noTelDisp, passDisp;
     Button btnGuardaDisp;
     String nombreDispText, notTelDispText, passDispText;
@@ -26,6 +29,12 @@ public class DispositivoActivity extends AppCompatActivity {
         nombreDisp = (EditText)findViewById(R.id.editNombre);
         noTelDisp = (EditText)findViewById(R.id.editTelefono);
         passDisp = (EditText)findViewById(R.id.editContrasena);
+        dbmanager = new DBManager(this);
+        try {
+            dbmanager.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         btnGuardaDisp = (Button)findViewById(R.id.btnGuardaDisp);
         btnGuardaDisp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -39,20 +48,28 @@ public class DispositivoActivity extends AppCompatActivity {
                     nombreDisp.setError("El nombre es obligatorio");
                     return;
                 }
-                if(TextUtils.isEmpty(notTelDispText))
+                else if(TextUtils.isEmpty(notTelDispText))
                 {
                     noTelDisp.setError("El número de teléfono es obligatorio");
                     return;
                 }
-                if (notTelDispText.trim().length() <10)
+                else if (notTelDispText.trim().length() <10)
                 {
                     noTelDisp.setError("Escriba un número de teléfono válido");
                     return;
                 }
-                if(TextUtils.isEmpty(passDispText))
+                else if(TextUtils.isEmpty(passDispText))
                 {
                     passDisp.setError("La contraseña es obligatoria");
                     return;
+                }
+                else{
+                    final String nombre = nombreDisp.getText().toString();
+                    final String telefono = noTelDisp.getText().toString();
+                    final String password = passDisp.getText().toString();
+                    dbmanager.insertDispositivo(nombre,telefono,password,0,0);
+                    Intent main = new Intent(DispositivoActivity.this,MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(main);
                 }
                 //Manda a llamar metodo de la clase mensaje
                 //Enva mensaje para iniciar el dispositivo
