@@ -26,7 +26,7 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
 
     Mensaje sms = new Mensaje(this);
-    //Declaraciòn de variables
+    //Declaración de variables
     String contraseña ="123456";
     String mensaje="";
     String noTelefono = "3121884228";
@@ -88,10 +88,13 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
             longitud= (infoUbicacion[2].replace("speed", "")).trim();
             sms = latitud + ", "+longitud;
             Toast.makeText(context, sms, Toast.LENGTH_LONG).show();
-            MarkerOptions a = new MarkerOptions()
-                    .position(new LatLng(19.255000, -103.735714));
-            Marker m = mMap.addMarker(a);
-            m.setPosition(new LatLng(19.255000, -103.735714));
+            //limpia el marcador actual
+            mMap.clear();
+            //Agrega el nuevo marcador con la mieva posición
+            LatLng posAct = new LatLng(Double.parseDouble(latitud), Double.parseDouble(longitud));
+            mMap.addMarker(new MarkerOptions().position(posAct).title("Posición actual"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(posAct, 15));
+
             //sms += "From : " + originNumber + "\ncontent: " + smsBody;
         }
 
