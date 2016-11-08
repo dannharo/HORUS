@@ -15,8 +15,11 @@ public class HorusDB extends SQLiteOpenHelper {
     // tables columns
     //TABLA DE DISPOSITIVOS
     public static final String T_D_ID  = "_id";
+    public static final String T_D_ALARMA_BATERIA  = "ALARM_BAT";
+    public static final String T_D_ALARMA_MOVIMIENTO  = "ALARM_MOV";
     public static final String T_D_NOMBRE  = "NOMBRE";
     public static final String T_D_NUMERO  = "NUMERO";
+    public static final String T_D_IMEI  = "IMEI";
     public static final String T_D_PASSWORD  = "PASSWORD";
     public static final String T_D_LATITUD  = "LATITUD";
     public static final String T_D_LONGITUD  = "LONGITUD";
@@ -35,15 +38,18 @@ public class HorusDB extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "horus_devices.db";
 
     // Database Version
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 5;
 
     // Creating tables query
     private static final String SQL_TABLA_DISPOSITIVOS = "create table "
             +TABLA_DISPOSITIVOS+ "("
             +T_D_ID+" integer primary key autoincrement, "
             +T_D_NOMBRE+" text, "
+            +T_D_IMEI+" text, "
             +T_D_NUMERO+" text not null, "
             +T_D_PASSWORD+" text, "
+            +T_D_ALARMA_BATERIA+" integer, "
+            +T_D_ALARMA_MOVIMIENTO+" integer, "
             +T_D_LATITUD+" real, "
             +T_D_LONGITUD+" real "
             +");";
@@ -77,55 +83,4 @@ public class HorusDB extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+TABLA_USUARIOS);
         onCreate(db);
     }
-    public void agregarDispositivo(String id, String nombre, String  numero, double latitud, double longitud){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(T_D_ID,id);
-        values.put(T_D_NOMBRE,nombre);
-        values.put(T_D_NUMERO,numero);
-        values.put(T_D_LATITUD,latitud);
-        values.put(T_D_LONGITUD,longitud);
-        db.insert(TABLA_DISPOSITIVOS,null,values);
-        db.close();
-    }
-    public void agregarUsuario(String usuario, String password, String nombre){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(T_U_NOMBRE,nombre);
-        values.put(T_U_USUARIO,usuario);
-        values.put(T_U_PASSWORD,password);
-        db.insert(TABLA_USUARIOS,null,values);
-        db.close();
-    }
-    public void agregarAdministrador(int id_dispositivo, String numero, String nombre){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(T_A_ID_DISPOSITIVO,id_dispositivo);
-        values.put(T_A_NUMERO,numero);
-        values.put(T_A_NOMBRE,nombre);
-        db.insert(TABLA_ADMON,null,values);
-        db.close();
-    }
-    public Cursor obtenerDispositivo(String id){
-        SQLiteDatabase db = this.getReadableDatabase();
-        String[] projection = {T_D_ID,T_D_NOMBRE,T_D_NUMERO,T_D_LATITUD,T_D_LONGITUD};
-        Cursor cursor = db.query(TABLA_DISPOSITIVOS,projection,"ID = ?",new String[]{String.valueOf(id)},null,null,null,null);
-        if(cursor != null && cursor.getCount()>0){
-            cursor.moveToFirst();
-            db.close();
-            return cursor;
-        }
-        else{
-            db.close();
-            return null;
-        }
-
-    }
-    public Cursor obtenerDispositivos(){
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor1 = db.rawQuery("SELECT "+T_U_ID+", "+T_D_NOMBRE+" FROM "+TABLA_DISPOSITIVOS,null);
-        return cursor1;
-
-    }
-
 }

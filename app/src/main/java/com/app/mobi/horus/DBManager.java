@@ -24,9 +24,12 @@ public class DBManager {
     public void close(){
         dbHelper.close();
     }
-    public void insertDispositivo(String nombre, String  numero, String  pass, double latitud, double longitud){
+    public void insertDispositivo(String nombre, String  numero, String  imei, String  pass, double latitud, double longitud){
         ContentValues contentValue = new ContentValues();
         contentValue.put(HorusDB.T_D_NOMBRE,nombre);
+        contentValue.put(HorusDB.T_D_IMEI,imei);
+        contentValue.put(HorusDB.T_D_ALARMA_BATERIA,0);
+        contentValue.put(HorusDB.T_D_ALARMA_MOVIMIENTO,0);
         contentValue.put(HorusDB.T_D_LATITUD,latitud);
         contentValue.put(HorusDB.T_D_LONGITUD,longitud);
         contentValue.put(HorusDB.T_D_NUMERO,numero);
@@ -71,13 +74,12 @@ public class DBManager {
         }
         return cursor;
     }
-    public int updateDispositivo(String id, String nombre, String  numero, double latitud, double longitud){
+    public int updateDispositivo(String id, String nombre, String  numero, String  imei){
         ContentValues contentValue = new ContentValues();
         contentValue.put(HorusDB.T_D_ID,id);
         contentValue.put(HorusDB.T_D_NOMBRE,nombre);
-        contentValue.put(HorusDB.T_D_LATITUD,latitud);
-        contentValue.put(HorusDB.T_D_LONGITUD,longitud);
         contentValue.put(HorusDB.T_D_NUMERO,numero);
+        contentValue.put(HorusDB.T_D_IMEI,imei);
         int i = database.update(HorusDB.TABLA_DISPOSITIVOS,contentValue,HorusDB.T_D_ID +" = "+id,null);
         return i;
     }
@@ -104,5 +106,25 @@ public class DBManager {
          int i = database.update(HorusDB.TABLA_DISPOSITIVOS, contentValue, HorusDB.T_D_ID + " = " + id, null);
             return i;
     }
-
+    public int updateAlarmMov(String id, int alarma){
+        ContentValues contentValue = new ContentValues();
+        contentValue.put(HorusDB.T_D_ALARMA_MOVIMIENTO,alarma);
+         int i = database.update(HorusDB.TABLA_DISPOSITIVOS, contentValue, HorusDB.T_D_ID + " = " + id, null);
+            return i;
+    }
+    public int updateAlarmBat(String id, int alarma){
+        ContentValues contentValue = new ContentValues();
+        contentValue.put(HorusDB.T_D_ALARMA_BATERIA,alarma);
+         int i = database.update(HorusDB.TABLA_DISPOSITIVOS, contentValue, HorusDB.T_D_ID + " = " + id, null);
+            return i;
+    }
+    public void deleteDispositivo(int _id){
+        database.delete(HorusDB.TABLA_DISPOSITIVOS, HorusDB.T_D_ID+" = "+_id,null);
+    }
+    public void deleteAdministrador(int _id){
+        database.delete(HorusDB.TABLA_ADMON, HorusDB.T_A_ID+" = "+_id,null);
+    }
+    public void deleteUsuario(int _id){
+        database.delete(HorusDB.TABLA_USUARIOS, HorusDB.T_U_ID+" = "+_id,null);
+    }
 }

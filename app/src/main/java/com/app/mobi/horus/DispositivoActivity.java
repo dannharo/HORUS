@@ -18,7 +18,7 @@ public class DispositivoActivity extends AppCompatActivity {
     String contraseña, noTelGps;
     String mensaje;
     private DBManager dbmanager;
-    EditText nombreDisp, noTelDisp, passDisp;
+    EditText nombreDisp, noTelDisp, passDisp,imeiDisp;
     Button btnGuardaDisp;
     String nombreDispText, notTelDispText, passDispText;
 
@@ -29,6 +29,7 @@ public class DispositivoActivity extends AppCompatActivity {
         nombreDisp = (EditText)findViewById(R.id.editNombre);
         noTelDisp = (EditText)findViewById(R.id.editTelefono);
         passDisp = (EditText)findViewById(R.id.editContrasena);
+        imeiDisp = (EditText)findViewById(R.id.editIMEI);
         dbmanager = new DBManager(this);
         try {
             dbmanager.open();
@@ -67,7 +68,8 @@ public class DispositivoActivity extends AppCompatActivity {
                     final String nombre = nombreDisp.getText().toString();
                     final String telefono = noTelDisp.getText().toString();
                     final String password = passDisp.getText().toString();
-                    dbmanager.insertDispositivo(nombre,telefono,password,0,0);
+                    final String imei = imeiDisp.getText().toString();
+                    dbmanager.insertDispositivo(nombre,telefono,imei,password,0,0);
                     Intent main = new Intent(DispositivoActivity.this,MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(main);
                 }
