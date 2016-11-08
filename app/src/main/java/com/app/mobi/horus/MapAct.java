@@ -83,11 +83,21 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
         }
         if (originNumber.equals(noTelefono)) {
             //Separamos la cadena para obtener la latitud y longitud
-            String[] infoUbicacion = smsBody.split(":");
-            latitud = (infoUbicacion[1].replace("long", "")).trim();
-            longitud= (infoUbicacion[2].replace("speed", "")).trim();
-            sms = latitud + ", "+longitud;
+            try {
+
+                String[] infoSms = smsBody.split("&");
+                String latLon = infoSms[1].replace("q=", "");
+                String[] infoUbicacion = latLon.split(",");
+                latitud = infoUbicacion[0].trim();
+                longitud = infoUbicacion[1].trim();
+                sms = latitud + ", " + longitud;
+            }
+            catch (Exception e)
+            {
+                sms = "Ocurrió un error";
+            }
             Toast.makeText(context, sms, Toast.LENGTH_LONG).show();
+
             //limpia el marcador actual
             mMap.clear();
             //Agrega el nuevo marcador con la mieva posición
