@@ -18,11 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".DispositivoActivity" />
         <activity android:name=".MapaActivity" />
@@ -46,7 +42,14 @@
         <activity
             android:name=".MapAct"
             android:label="@string/title_activity_map" />
-        <activity android:name=".ListAdminActivity"></activity>
+        <activity android:name=".ListAdminActivity" />
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
