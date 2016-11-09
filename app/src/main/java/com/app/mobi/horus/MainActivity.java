@@ -5,6 +5,7 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,9 +22,10 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import java.sql.SQLException;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     ImageButton floatButton;
+    Button btnConfigurar;
     //Array que contiene los dispositivos dados de alta
     String[] dispositivosArray = {"Dipositivo 1", "Dispositivo de prueba","mapa"};
     private DBManager dbmanager;
@@ -58,15 +60,9 @@ public class MainActivity extends AppCompatActivity {
         listview.setAdapter(adapter);
         //Muestra el botón flotante para agreagar un nuevo dispositivo
         floatButton =(ImageButton) findViewById(R.id.imageButton);
-        floatButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), DispositivoActivity.class);
-                startActivityForResult(myIntent, 0);
-                //  Toast.makeText(getApplicationContext(), "Button is clicked", Toast.LENGTH_LONG).show();
-            }
-        });
-
+        floatButton.setOnClickListener(this);
+        btnConfigurar=(Button)findViewById(R.id.childButton);
+        //btnConfigurar.setOnClickListenr(this);
         //Muestra en la listview los dispositivos
         //SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, new HorusDB(this).obtenerDispositivos(),new String[]{"ID","NOMBRE"});
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dispositivosArray);
@@ -88,5 +84,16 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+
+    }
+    public void onClick(View v)
+    {
+        switch (v.getId()) {
+            case R.id.imageButton:
+                Intent myIntent = new Intent(this, DispositivoActivity.class);
+                startActivityForResult(myIntent, 0);
+            case R.id.btnLogin:
+                Toast.makeText(getApplicationContext(), "Configurar dispositivo!", Toast.LENGTH_SHORT).show();
+        }
     }
 }
