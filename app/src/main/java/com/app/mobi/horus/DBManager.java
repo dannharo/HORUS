@@ -127,4 +127,17 @@ public class DBManager {
     public void deleteUsuario(int _id){
         database.delete(HorusDB.TABLA_USUARIOS, HorusDB.T_U_ID+" = "+_id,null);
     }
+    public String getPassLogin(String userName)
+    {
+        Cursor cursor=database.query(HorusDB.TABLA_USUARIOS, null,HorusDB.T_U_USUARIO+ " =?", new String[]{userName}, null, null, null);
+        if(cursor.getCount()<1) // UserName Not Exist
+        {
+            cursor.close();
+            return "NOT EXIST";
+        }
+        cursor.moveToFirst();
+        String password= cursor.getString(cursor.getColumnIndex(HorusDB.T_U_PASSWORD));
+        cursor.close();
+        return password;
+    }
 }
