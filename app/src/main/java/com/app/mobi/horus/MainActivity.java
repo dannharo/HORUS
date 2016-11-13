@@ -27,7 +27,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import java.sql.SQLException;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity {
 
     ImageButton floatButton;
     Button btnConfigurar;
@@ -69,7 +69,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
        // btnConfigurar = (Button) findViewById(R.id.childButton);
         floatButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Nuevo dispositivo", Toast.LENGTH_LONG).show();
+                Intent myIntent = new Intent(MainActivity.this, DispositivoActivity.class);
+                startActivityForResult(myIntent, 0);
             }
 
 
@@ -110,14 +111,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
-    public void onClick(View v)
+   /* public void onClick(View v)
     {
         switch (v.getId()) {
             case R.id.imageButton:
                 Intent myIntent = new Intent(this, DispositivoActivity.class);
                 startActivityForResult(myIntent, 0);
         }
-    }
+    }*/
 
 
     //Adapter

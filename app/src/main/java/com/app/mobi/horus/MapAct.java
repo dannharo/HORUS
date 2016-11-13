@@ -130,9 +130,11 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
             return true;
         }
         if (id == R.id.armado) {
-            mensaje = "arm"+contraseña;
-            sms.enviarMensaje(noTelefono, mensaje);
+           // mensaje = "arm"+contraseña;
+            //sms.enviarMensaje(noTelefono, mensaje);
             //Toast.makeText(this, "Armar dispositivo", Toast.LENGTH_LONG).show();
+            Intent intentAlert = new Intent(this, NotifyActivity.class);
+            this.startActivity(intentAlert);
             return true;
         }
         if (id == R.id.alarma) {
