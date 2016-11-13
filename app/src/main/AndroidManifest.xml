@@ -54,10 +54,6 @@
         </activity>
         <activity android:name=".NotifyActivity" />
 
-        <service
-            android:name=".ServiceSms"
-            android:enabled="true"
-            android:exported="true"></service>
     </application>
 
 </manifest>

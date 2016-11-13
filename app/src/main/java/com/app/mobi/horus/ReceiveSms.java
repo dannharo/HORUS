@@ -27,7 +27,9 @@ public class ReceiveSms extends BroadcastReceiver {
             sms+="From: "+senderNumber + "\nContent: "+ smsBody+"\n";
             //MainActivity.mp.start();
         }
-        return (sms);
+        Toast.makeText(context, sms, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(ReceiveSms.this, sms, Toast.LENGTH_SHORT).show();
+        //return (sms);
     }
 }
 
