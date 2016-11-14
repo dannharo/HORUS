@@ -8,4 +8,9 @@
     <string name="version_tag">version 0.0.4</string>
     <string name="btn_list">Configurar</string>
     <string name="title_activity_map">Map</string>
+    <string name="nombre_tag">Nombre:</string>
+    <string name="numero_tag">Número:</string>
+    <string name="IMEI_tag">IMEI:</string>
+    <string name="pass_tag">Contraseña:</string>
+    <string name="btn_ver_mapa_tag">Ver en el Mapa</string>
 </resources>
