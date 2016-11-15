@@ -70,6 +70,6 @@ public class ReceiveSms extends BroadcastReceiver {
         }
     }
 
-   
+
 }
 

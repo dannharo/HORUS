@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 //Obtiene el nombre del elemento seleccionado
                 //String data = (String) listview.getAdapter().getItem(position);
                 //Se define el intent, indica a la clase a la que se pasara la informacion
-                Intent intent = new Intent(MainActivity.this, MapAct.class);
+                Intent intent = new Intent(MainActivity.this, DeviceCrudActivity.class);
                 //  intent.putExtra("idDispositivo", data);
                 startActivity(intent);
                 btnConfigurar = (Button) findViewById(R.id.childButton);

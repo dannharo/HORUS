@@ -55,11 +55,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".NotifyActivity" />
-
         <service
             android:name=".ServiceCommunicator"
             android:enabled="true"
             android:exported="true"></service>
+        <activity android:name=".DeviceCrudActivity"></activity>
     </application>
 
 </manifest>
