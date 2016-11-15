@@ -77,9 +77,9 @@
         android:text="Eliminar"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:id="@+id/button4"
-        android:layout_alignBaseline="@+id/button3"
-        android:layout_alignBottom="@+id/button3"
+        android:id="@+id/btnOptEliminar"
+        android:layout_alignBaseline="@+id/btnOptEditar"
+        android:layout_alignBottom="@+id/btnOptEditar"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -94,7 +94,7 @@
         android:text="Editar"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:id="@+id/button3"
+        android:id="@+id/btnOptEditar"
         android:elevation="0dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
@@ -105,8 +105,8 @@
         android:text="@string/btn_ver_mapa_tag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button2"
-        android:layout_above="@+id/button3"
+        android:id="@+id/btnOptMapa"
+        android:layout_above="@+id/btnOptEditar"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 

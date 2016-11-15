@@ -22,54 +22,44 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class ReceiveSms extends BroadcastReceiver {
     //Declaración de variables
-    String contraseña ="123456";
-    String mensaje="";
+    String contraseña = "123456";
+    String mensaje = "";
     String noTelefono = "3121884228";
-    String latitud="";
-    String longitud= "";
+    String latitud = "";
+    String longitud = "";
+
     @Override
-    public void onReceive(Context context, Intent intent)
-    {
+    public void onReceive(Context context, Intent intent) {
         Bundle bundle = intent.getExtras();
-        Object[] objArr =(Object[])bundle.get("pdus");
+        Object[] objArr = (Object[]) bundle.get("pdus");
         String sms = "";
-        String smsBody ="";
+        String smsBody = "";
         String originNumber = "";
 
-        for(int i= 0; i<objArr.length; i++)
-        {
-            SmsMessage smsMsg = SmsMessage.createFromPdu((byte[])objArr[i]);
+        for (int i = 0; i < objArr.length; i++) {
+            SmsMessage smsMsg = SmsMessage.createFromPdu((byte[]) objArr[i]);
             smsBody = smsMsg.getMessageBody();
             originNumber = smsMsg.getDisplayOriginatingAddress();
 
         }
         if (originNumber.equals(noTelefono)) {
             //Se verifica que sea un mensaje de sensor alarma
-            if(smsBody.contains("sensor alarm!"))
-            {
+            if (smsBody.contains("sensor alarm!")) {
                 //Se muestra el cuadro de dialogo con la alarma
-
+                Intent intentAlert = new Intent(context, NotifyActivity.class);
+                context.startActivity(intentAlert);
             }
-           /* //Separamos la cadena para obtener la latitud y longitud
-            try {
-
-                String[] infoSms = smsBody.split("&");
-                String latLon = infoSms[1].replace("q=", "");
-                String[] infoUbicacion = latLon.split(",");
-                latitud = infoUbicacion[0].trim();
-                longitud = infoUbicacion[1].trim();
-                sms = latitud + ", " + longitud;
-            }
-            catch (Exception e)
+            else
             {
-                sms = "Ocurrió un error";
+                //Abrimos el layout del mapa
+                Intent intentMapa = new Intent(context, MapAct.class);
+                intentMapa.putExtra("variable", "prueba");
+                context.startActivity(intentMapa);
+
             }
-            Toast.makeText(context, sms, Toast.LENGTH_LONG).show();*/
-
-
         }
+        Toast.makeText(context, smsBody, Toast.LENGTH_LONG).show();
     }
-
 
 }
 
