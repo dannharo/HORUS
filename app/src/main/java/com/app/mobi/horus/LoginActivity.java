@@ -18,6 +18,8 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Iniciar servicio para recibir mensajes
+        startService(new Intent(this, ServiceCommunicator.class));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         //Se obtiene la información ingresada por el usuario

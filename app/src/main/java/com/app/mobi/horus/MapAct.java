@@ -26,6 +26,7 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
 
     Mensaje sms = new Mensaje(this);
+    NotifyActivity alarma = new NotifyActivity();
     //Declaración de variables
     String contraseña ="123456";
     String mensaje="";
@@ -135,6 +136,7 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
             //Toast.makeText(this, "Armar dispositivo", Toast.LENGTH_LONG).show();
             Intent intentAlert = new Intent(this, NotifyActivity.class);
             this.startActivity(intentAlert);
+            //alarma.mostrarAlerta();
             return true;
         }
         if (id == R.id.alarma) {

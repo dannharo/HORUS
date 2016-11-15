@@ -23,11 +23,6 @@ public class NotifyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notify);
-    }
-
-    public void mostrarAlaerta(View v)
-    {
-        //Se crea el contructor de los cuadros de dialogo
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         //Metodos del constructor
         builder.setTitle("Alarma de movimiento");
@@ -45,5 +40,11 @@ public class NotifyActivity extends AppCompatActivity {
         //se crea y muestra el cuadro de dialogo
         Dialog dialog = builder.create();
         dialog.show();
+    }
+
+    public void mostrarAlerta()
+    {
+        //Se crea el contructor de los cuadros de dialogo
+
     }
 }
