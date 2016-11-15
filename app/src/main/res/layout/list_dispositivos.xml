@@ -6,13 +6,13 @@
         android:id="@+id/lvnombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="28dip" />
-    <Button
-        android:id="@+id/childButton"
+        android:textSize="28dip"
+        android:layout_toRightOf="@+id/lvid"
+        android:layout_marginLeft="5dp"/>
+    <TextView
+        android:id="@+id/lvid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:text="@string/btn_list"
-        android:focusable="false"
-        android:focusableInTouchMode="false"/>
+        android:textSize="20dip"
+        />
 </RelativeLayout>

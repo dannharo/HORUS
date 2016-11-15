@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private DBManager dbmanager;
     private ListView listview;
     private SimpleCursorAdapter adapter;
-    final String[] from = new String[]{HorusDB.T_D_NOMBRE};
-    final int[] to = new int[]{R.id.lvnombre};
+    final String[] from = new String[]{HorusDB.T_D_NOMBRE,HorusDB.T_D_ID};
+    final int[] to = new int[]{R.id.lvnombre,R.id.lvid};
 
 
     @Override
@@ -94,14 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, DeviceCrudActivity.class);
                 //  intent.putExtra("idDispositivo", data);
                 startActivity(intent);
-                btnConfigurar = (Button) findViewById(R.id.childButton);
-                btnConfigurar.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "Configuración de dispositivo", Toast.LENGTH_LONG).show();
-                    }
 
-
-                });
             }
 
         });
