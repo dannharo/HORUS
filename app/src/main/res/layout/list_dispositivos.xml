@@ -7,12 +7,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="28dip"
-        android:layout_toRightOf="@+id/lvid"
         android:layout_marginLeft="5dp"/>
     <TextView
         android:id="@+id/lvid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dip"
+        android:layout_toRightOf="@+id/lvnombre"
+        android:textColor="@color/white"
+
         />
 </RelativeLayout>
