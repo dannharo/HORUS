@@ -43,6 +43,7 @@ public class ReceiveSms extends BroadcastReceiver {
 
         }
         if (originNumber.equals(noTelefono)) {
+            //Toast.makeText(context, smsBody, Toast.LENGTH_LONG).show();
             //Se verifica que sea un mensaje de sensor alarma
             if (smsBody.contains("sensor alarm!")) {
                 //Se muestra el cuadro de dialogo con la alarma
@@ -51,14 +52,31 @@ public class ReceiveSms extends BroadcastReceiver {
             }
             else
             {
-                //Abrimos el layout del mapa
-                Intent intentMapa = new Intent(context, MapAct.class);
-                intentMapa.putExtra("variable", "prueba");
-                context.startActivity(intentMapa);
+               try {
+
+                    String[] infoSms = smsBody.split("&");
+                    String latLon = infoSms[1].replace("q=", "");
+                    String[] infoUbicacion = latLon.split(",");
+                    latitud = infoUbicacion[0].trim();
+                    longitud = infoUbicacion[1].trim();
+                    sms = latitud + ", " + longitud;
+                    Toast.makeText(context, sms, Toast.LENGTH_LONG).show();
+
+                    //Abrimos el layout del mapa
+                    Intent intentMapa = new Intent(context, MapAct.class);
+                    intentMapa.putExtra("longitud", longitud);
+                    intentMapa.putExtra("latitud", latitud);
+                    context.startActivity(intentMapa);
+                }
+                catch (Exception e)
+                {
+                    sms = "Ocurrió un error";
+                }
+                Toast.makeText(context, sms, Toast.LENGTH_LONG).show();
 
             }
         }
-        Toast.makeText(context, smsBody, Toast.LENGTH_LONG).show();
+
     }
 
 }

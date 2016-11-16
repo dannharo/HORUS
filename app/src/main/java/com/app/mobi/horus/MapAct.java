@@ -31,9 +31,10 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
     String contraseña ="123456";
     String mensaje="";
     String noTelefono = "3121884228";
-    String latitud="";
-    String longitud= "";
-    BroadcastReceiver receiver = null;
+    //BroadcastReceiver receiver = null;
+    String lat="";
+    String lon="";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,22 +51,40 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+
+        //Intent
+        Intent objIntent = this.getIntent();
+        lat = objIntent.getStringExtra("latitud");
+        lon = objIntent.getStringExtra("longitud");
+
+        if ((lat != null) && (lon != null))
+        {
+            Toast.makeText(this, "lat: "+lat+", lon: "+lon, Toast.LENGTH_LONG).show();
+            //Se muestra en el mapa la nueva ubicación
+            //limpia el marcador actual
+            mMap.clear();
+            //Agrega el nuevo marcador con la mieva posición
+            LatLng posAct = new LatLng(Double.parseDouble(lat), Double.parseDouble(lon));
+            mMap.addMarker(new MarkerOptions().position(posAct).title("Posición actual"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(posAct, 15));
+        }
+
         //Leer mensaje
-        IntentFilter filter = new IntentFilter("android.provider.Telephony.SMS_RECEIVED");
+     /*   IntentFilter filter = new IntentFilter("android.provider.Telephony.SMS_RECEIVED");
         receiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context arr0, Intent arr1) {
                 processReceive(arr0, arr1);
             }
         };
-        registerReceiver(receiver, filter);
+        registerReceiver(receiver, filter);*/
     }
     //Funciones para recibir mensaje de texto
-    protected void onDestroy(){
+  /*  protected void onDestroy(){
         super.onDestroy();
         unregisterReceiver(receiver);
-    }
-    public void processReceive(Context context, Intent intent)
+    }*/
+  /*  public void processReceive(Context context, Intent intent)
     {
 
         //TextView lbs = (TextView)findViewById(R.id.textView3);
@@ -110,7 +129,8 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
         }
 
         //lbs.setText(sms);
-    }
+    }*/
+
 
     //Menu
     @Override
