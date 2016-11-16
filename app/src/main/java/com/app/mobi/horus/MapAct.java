@@ -40,25 +40,20 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-
-        //El mensaje se conforma de la sig forma: fix030s(obtener en 30 segundos la posicion)+001n
-        // (numero de veces que se quiere obtener la posicion cada 30segunds)+contraseña
-        mensaje = "fix030s001n"+contraseña;
-        //Se manda mensaje para obtener la ubicación del gps
-        sms.enviarMensaje(noTelefono, mensaje);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
 
-        //Intent
+        //Intent, obtiene los datos enviados por la clase ReceiveSms
         Intent objIntent = this.getIntent();
         lat = objIntent.getStringExtra("latitud");
         lon = objIntent.getStringExtra("longitud");
 
         if ((lat != null) && (lon != null))
         {
+            //Muestra en el mapa la ubicación
             Toast.makeText(this, "lat: "+lat+", lon: "+lon, Toast.LENGTH_LONG).show();
             //Se muestra en el mapa la nueva ubicación
             //limpia el marcador actual
@@ -67,6 +62,15 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
             LatLng posAct = new LatLng(Double.parseDouble(lat), Double.parseDouble(lon));
             mMap.addMarker(new MarkerOptions().position(posAct).title("Posición actual"));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(posAct, 15));
+        }
+        else
+        {
+            //Envia mensaje para obtener la ubicación actual
+            //El mensaje se conforma de la sig forma: fix030s(obtener en 30 segundos la posicion)+001n
+            // (numero de veces que se quiere obtener la posicion cada 30segunds)+contraseña
+            mensaje = "fix030s001n"+contraseña;
+            //Se manda mensaje para obtener la ubicación del gps
+            sms.enviarMensaje(noTelefono, mensaje);
         }
 
         //Leer mensaje
