@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -86,12 +87,15 @@ public class MainActivity extends AppCompatActivity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView idTView = (TextView) view.findViewById(R.id.lvid);
+                String ids = idTView.getText().toString();
                 //Muestra mensaje con la posicion del elemento seleccionado
-                Toast.makeText(getBaseContext(), parent.getItemIdAtPosition(position) + " fue seleccionado", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), ids + " fue seleccionado", Toast.LENGTH_LONG).show();
                 //Obtiene el nombre del elemento seleccionado
                 //String data = (String) listview.getAdapter().getItem(position);
                 //Se define el intent, indica a la clase a la que se pasara la informacion
                 Intent intent = new Intent(MainActivity.this, DeviceCrudActivity.class);
+                intent.putExtra("id_device",ids);
                 //  intent.putExtra("idDispositivo", data);
                 startActivity(intent);
 
