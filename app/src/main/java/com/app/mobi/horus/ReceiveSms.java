@@ -70,11 +70,11 @@ public class ReceiveSms extends BroadcastReceiver {
                     context.startActivity(intentMapa);*/
 
                 Intent intentMapa = new Intent();
-                    intentMapa.setClassName("com.app.mobi.horus", "com.app.mobi.horus.MapAct");
-
+                intentMapa.setClassName("com.app.mobi.horus", "com.app.mobi.horus.MapAct");
+                Toast.makeText(context, "datos:"+ sms, Toast.LENGTH_LONG).show();
                     intentMapa.putExtra("longitud", longitud);
                     intentMapa.putExtra("latitud", latitud);
-                Toast.makeText(context, sms, Toast.LENGTH_LONG).show();
+
                     intentMapa.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                    context.startActivity(intentMapa);
 

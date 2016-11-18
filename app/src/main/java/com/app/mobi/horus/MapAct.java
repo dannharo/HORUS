@@ -21,6 +21,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.sql.SQLException;
+
 public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -34,10 +36,21 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
     //BroadcastReceiver receiver = null;
     String lat="";
     String lon="";
-
+    //Almacena la latitud y longitud que actualmente estan almacenados en la base de datos
+    Double latActual = 0.0;
+    Double lonActual=0.0;
+    private DBManager dbmanager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Se crea instancia con la clase que contiene la base de datos
+        dbmanager = new DBManager(this);
+        try {
+            dbmanager.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -62,6 +75,8 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
             LatLng posAct = new LatLng(Double.parseDouble(lat), Double.parseDouble(lon));
             mMap.addMarker(new MarkerOptions().position(posAct).title("Posición actual"));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(posAct, 15));
+            //Se guarda en la tabla la ubicacion actual
+            dbmanager.updateDispositivo(1, Double.parseDouble(lat), Double.parseDouble(lon));
         }
         else
         {

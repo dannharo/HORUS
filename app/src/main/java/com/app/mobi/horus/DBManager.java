@@ -82,7 +82,7 @@ public class DBManager {
         }
         return cursor;
     }
-    public int updateDispositivo(String id, String nombre, String  numero, String  imei){
+    public int updateDispositivo(int id, String nombre, String  numero, String  imei){
         ContentValues contentValue = new ContentValues();
         contentValue.put(HorusDB.T_D_ID,id);
         contentValue.put(HorusDB.T_D_NOMBRE,nombre);
@@ -91,7 +91,7 @@ public class DBManager {
         int i = database.update(HorusDB.TABLA_DISPOSITIVOS,contentValue,HorusDB.T_D_ID +" = "+id,null);
         return i;
     }
-    public int updateUsuarios(String id,String usuario, String password, String nombre){
+    public int updateUsuarios(int id,String usuario, String password, String nombre){
         ContentValues contentValue = new ContentValues();
         contentValue.put(HorusDB.T_U_NOMBRE,nombre);
         contentValue.put(HorusDB.T_U_USUARIO,usuario);
@@ -107,7 +107,7 @@ public class DBManager {
         int i = database.update(HorusDB.TABLA_ADMON,contentValue,HorusDB.T_A_ID +" = "+id,null);
         return i;
     }
-    public int updateDispositivo(String id, double latitud, double longitud){
+    public int updateDispositivo(int id, double latitud, double longitud){
         ContentValues contentValue = new ContentValues();
         contentValue.put(HorusDB.T_D_LATITUD,latitud);
         contentValue.put(HorusDB.T_D_LONGITUD,longitud);
