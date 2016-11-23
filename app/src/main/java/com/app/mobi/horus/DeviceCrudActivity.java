@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import java.sql.SQLException;
 
@@ -18,6 +19,7 @@ public class DeviceCrudActivity extends AppCompatActivity {
     private DBManager dbManager;
     //Variable que almacena el id del dispositivo seleccionado
     private int _id;
+    String id="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +32,7 @@ public class DeviceCrudActivity extends AppCompatActivity {
         }
         //Se almacena el id del dispositivo que fue enviado
         Intent intent = getIntent();
-        String id = intent.getStringExtra("id_device");
+        id = intent.getStringExtra("id_device");
         _id = Integer.parseInt(id);
         Cursor cursor = dbManager.fetchDispositivo(_id);
         textNombre = (EditText)findViewById(R.id.editNombreDisp);
@@ -52,7 +54,7 @@ public class DeviceCrudActivity extends AppCompatActivity {
         btnMapa.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(DeviceCrudActivity.this, MapAct.class);
-                intent.putExtra("id_device",_id);
+                intent.putExtra("id_device",id);
                 startActivity(intent);
             }
         });

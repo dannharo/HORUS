@@ -45,6 +45,7 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         //Se crea instancia con la clase que contiene la base de datos
         dbmanager = new DBManager(this);
         try {
@@ -65,8 +66,8 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
         Intent objIntent = this.getIntent();
         lat = objIntent.getStringExtra("latitud");
         lon = objIntent.getStringExtra("longitud");
-        idDisp = objIntent.getStringExtra("id");
-
+        idDisp = objIntent.getStringExtra("id_device");
+        //Toast.makeText(this, idDisp,  Toast.LENGTH_LONG).show();
         if ((lat != null) && (lon != null))
         {
             //Muestra en el mapa la ubicación
@@ -211,6 +212,7 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
         String latitudBD="";
         String longitudBD="";
         String nombreDisp="";
+
         Cursor cursor = dbmanager.fetchDispositivo(Integer.parseInt(idDisp));
         if(cursor.moveToFirst()){
             while(!cursor.isAfterLast()){
@@ -222,8 +224,8 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
         }
         cursor.close();
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(Double.parseDouble(latitudBD), Double.parseDouble(longitudBD));
-        mMap.addMarker(new MarkerOptions().position(sydney).title(nombreDisp));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng actualBD = new LatLng(Double.parseDouble(latitudBD), Double.parseDouble(longitudBD));
+        mMap.addMarker(new MarkerOptions().position(actualBD).title(nombreDisp));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(actualBD, 15));
     }
 }
