@@ -76,6 +76,7 @@ public class HorusDB extends SQLiteOpenHelper {
         db.execSQL(SQL_TABLA_DISPOSITIVOS);
         db.execSQL(SQL_TABLA_USUARIOS);
         db.execSQL(SQL_TABLA_ADMON);
+        db.execSQL("INSERT INTO " + TABLA_USUARIOS+ "("+T_U_USUARIO+", "+T_U_PASSWORD+", "+T_U_NOMBRE+") VALUES ('horus', 'M0B1H0RU5','Horus User')");
     }
     public void onUpgrade(SQLiteDatabase db,int oldVersion, int newVersion){
         db.execSQL("DROP TABLE IF EXISTS "+TABLA_DISPOSITIVOS);

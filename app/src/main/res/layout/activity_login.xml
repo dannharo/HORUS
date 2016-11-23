@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:text="admin"/>
+        android:text="horus"/>
     <TextView
     android:layout_width="wrap_content"
     android:text="Contraseña"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:layout_marginBottom="10dp"
-        android:text="admin"/>
+        android:text="M0B1H0RU5"/>
     <TextView
         android:id="@+id/textMensaje"
         android:layout_width="wrap_content"

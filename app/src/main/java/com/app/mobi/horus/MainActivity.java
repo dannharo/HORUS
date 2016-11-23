@@ -58,6 +58,18 @@ public class MainActivity extends AppCompatActivity {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+       /* String user="", pass="", name="";
+        Cursor usuario = dbmanager.fetchUsuarios();
+        if(usuario.moveToFirst()){
+            while(!usuario.isAfterLast()){
+                 user = usuario.getString(usuario.getColumnIndex(HorusDB.T_U_USUARIO));
+                 pass = usuario.getString(usuario.getColumnIndex(HorusDB.T_U_PASSWORD));
+                 name = usuario.getString(usuario.getColumnIndex(HorusDB.T_U_NOMBRE));
+                usuario.moveToNext();
+            }
+        }
+        usuario.close();
+        Toast.makeText(this, user+", "+pass+", "+name, Toast.LENGTH_LONG).show();*/
         Cursor cursor = dbmanager.fetchDispositivos();
         listview = (ListView) findViewById(R.id.listDispositivos);
         listview.setEmptyView(findViewById(R.id.empty));

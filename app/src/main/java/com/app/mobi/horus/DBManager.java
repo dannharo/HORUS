@@ -21,6 +21,7 @@ public class DBManager {
         database = dbHelper.getWritableDatabase();
         return this;
     }
+
     public void close(){
         dbHelper.close();
     }
