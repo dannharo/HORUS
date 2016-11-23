@@ -3,6 +3,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.Cursor;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -36,6 +37,7 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
     //BroadcastReceiver receiver = null;
     String lat="";
     String lon="";
+    String idDisp="";
     //Almacena la latitud y longitud que actualmente estan almacenados en la base de datos
     Double latActual = 0.0;
     Double lonActual=0.0;
@@ -63,6 +65,7 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
         Intent objIntent = this.getIntent();
         lat = objIntent.getStringExtra("latitud");
         lon = objIntent.getStringExtra("longitud");
+        idDisp = objIntent.getStringExtra("id");
 
         if ((lat != null) && (lon != null))
         {
@@ -76,7 +79,7 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
             mMap.addMarker(new MarkerOptions().position(posAct).title("Posición actual"));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(posAct, 15));
             //Se guarda en la tabla la ubicacion actual
-            dbmanager.updateDispositivo(1, Double.parseDouble(lat), Double.parseDouble(lon));
+            dbmanager.updateDispositivo(Integer.parseInt(idDisp), Double.parseDouble(lat), Double.parseDouble(lon));
         }
         else
         {
@@ -204,10 +207,23 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        //Se obtiene la posicion guardada en la BD
+        String latitudBD="";
+        String longitudBD="";
+        String nombreDisp="";
+        Cursor cursor = dbmanager.fetchDispositivo(Integer.parseInt(idDisp));
+        if(cursor.moveToFirst()){
+            while(!cursor.isAfterLast()){
+                nombreDisp = cursor.getString(cursor.getColumnIndex(HorusDB.T_D_NOMBRE));
+                longitudBD = cursor.getString(cursor.getColumnIndex(HorusDB.T_D_LONGITUD));
+                latitudBD = cursor.getString(cursor.getColumnIndex(HorusDB.T_D_LATITUD));
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        LatLng sydney = new LatLng(Double.parseDouble(latitudBD), Double.parseDouble(longitudBD));
+        mMap.addMarker(new MarkerOptions().position(sydney).title(nombreDisp));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }

@@ -59,7 +59,7 @@ public class DBManager {
         return cursor;
     }
     public  Cursor fetchDispositivo(int _id){
-        String[] columns = new String[]{HorusDB.T_D_ID,HorusDB.T_D_NOMBRE,HorusDB.T_D_NUMERO,HorusDB.T_D_IMEI,HorusDB.T_D_PASSWORD};
+        String[] columns = new String[]{HorusDB.T_D_ID,HorusDB.T_D_NOMBRE,HorusDB.T_D_NUMERO,HorusDB.T_D_IMEI,HorusDB.T_D_PASSWORD,HorusDB.T_D_LATITUD,HorusDB.T_D_LONGITUD};
         Cursor cursor =  database.query(HorusDB.TABLA_DISPOSITIVOS,columns, HorusDB.T_D_ID+" = "+_id,null,null,null,null);
         if(cursor != null){
             cursor.moveToFirst();

@@ -21,7 +21,6 @@ public class ListAdminActivity extends AppCompatActivity {
     final String[] from = new String[]{HorusDB.T_A_NOMBRE};
     final int[] to = new int[]{R.id.lvnombreAdministrador};
 
-    String[] administradoresList = {"Administrador 1", "Administrador 2"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

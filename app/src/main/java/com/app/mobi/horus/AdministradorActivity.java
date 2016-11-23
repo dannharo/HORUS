@@ -67,7 +67,7 @@ public class AdministradorActivity extends AppCompatActivity {
                     startActivity(main);
                 }
                 //Manda a llamar metodo de la clase mensaje
-                mensaje = "admin" + contraseña + " " + noTelefono;
+                mensaje = "admin" + contraseña + " " + telAdminText;
                 sms.enviarMensaje(noTelGps, mensaje);
             }
         });

@@ -52,6 +52,7 @@ public class DeviceCrudActivity extends AppCompatActivity {
         btnMapa.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(DeviceCrudActivity.this, MapAct.class);
+                intent.putExtra("id_device",_id);
                 startActivity(intent);
             }
         });
