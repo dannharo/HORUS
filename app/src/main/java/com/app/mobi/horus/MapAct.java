@@ -37,11 +37,12 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
     //BroadcastReceiver receiver = null;
     String lat="";
     String lon="";
-    String idDisp="";
     //Almacena la latitud y longitud que actualmente estan almacenados en la base de datos
     Double latActual = 0.0;
     Double lonActual=0.0;
     private DBManager dbmanager;
+    //Almacena el id del dispositivo
+    int idDisp = DeviceCrudActivity._id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,31 +67,6 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
         Intent objIntent = this.getIntent();
         lat = objIntent.getStringExtra("latitud");
         lon = objIntent.getStringExtra("longitud");
-        idDisp = objIntent.getStringExtra("id_device");
-        //Toast.makeText(this, idDisp,  Toast.LENGTH_LONG).show();
-        if ((lat != null) && (lon != null))
-        {
-            //Muestra en el mapa la ubicación
-            Toast.makeText(this, "lat: "+lat+", lon: "+lon, Toast.LENGTH_LONG).show();
-            //Se muestra en el mapa la nueva ubicación
-            //limpia el marcador actual
-            mMap.clear();
-            //Agrega el nuevo marcador con la mieva posición
-            LatLng posAct = new LatLng(Double.parseDouble(lat), Double.parseDouble(lon));
-            mMap.addMarker(new MarkerOptions().position(posAct).title("Posición actual"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(posAct, 15));
-            //Se guarda en la tabla la ubicacion actual
-            dbmanager.updateDispositivo(Integer.parseInt(idDisp), Double.parseDouble(lat), Double.parseDouble(lon));
-        }
-        else
-        {
-            //Envia mensaje para obtener la ubicación actual
-            //El mensaje se conforma de la sig forma: fix030s(obtener en 30 segundos la posicion)+001n
-            // (numero de veces que se quiere obtener la posicion cada 30segunds)+contraseña
-            mensaje = "fix030s001n"+contraseña;
-            //Se manda mensaje para obtener la ubicación del gps
-            sms.enviarMensaje(noTelefono, mensaje);
-        }
 
         //Leer mensaje
      /*   IntentFilter filter = new IntentFilter("android.provider.Telephony.SMS_RECEIVED");
@@ -213,19 +189,39 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
         String longitudBD="";
         String nombreDisp="";
 
-        Cursor cursor = dbmanager.fetchDispositivo(Integer.parseInt(idDisp));
-        if(cursor.moveToFirst()){
+        if ((lat != null) && (lon != null))
+        {
+            //Muestra en el mapa la ubicación obtenida del sms gps
+            LatLng actual = new LatLng(Double.parseDouble(lat), Double.parseDouble(lon));
+            mMap.addMarker(new MarkerOptions().position(actual).title("Actual"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(actual, 15));
+            //Se guarda en la tabla la ubicacion actual
+             dbmanager.updateDispositivo(idDisp, Double.parseDouble(lat), Double.parseDouble(lon));
+        }
+        else
+        {
+            //Se obtiene la posicion guardada en la bd
+            Cursor cursor = dbmanager.fetchDispositivo(idDisp);
+            if(cursor.moveToFirst()){
             while(!cursor.isAfterLast()){
                 nombreDisp = cursor.getString(cursor.getColumnIndex(HorusDB.T_D_NOMBRE));
                 longitudBD = cursor.getString(cursor.getColumnIndex(HorusDB.T_D_LONGITUD));
                 latitudBD = cursor.getString(cursor.getColumnIndex(HorusDB.T_D_LATITUD));
                 cursor.moveToNext();
+                }
             }
+            cursor.close();
+            //Se agrega en el mapa la posicion obtenida
+            LatLng actualBD = new LatLng(Double.parseDouble(latitudBD), Double.parseDouble(longitudBD));
+            mMap.addMarker(new MarkerOptions().position(actualBD).title(nombreDisp));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(actualBD, 15));
+            //Envia mensaje para obtener la ubicación actual
+            //El mensaje se conforma de la sig forma: fix030s(obtener en 30 segundos la posicion)+001n
+            // (numero de veces que se quiere obtener la posicion cada 30segunds)+contraseña
+            mensaje = "fix030s001n"+contraseña;
+            //Se manda mensaje para obtener la ubicación del gps
+            sms.enviarMensaje(noTelefono, mensaje);
         }
-        cursor.close();
-        // Add a marker in Sydney and move the camera
-        LatLng actualBD = new LatLng(Double.parseDouble(latitudBD), Double.parseDouble(longitudBD));
-        mMap.addMarker(new MarkerOptions().position(actualBD).title(nombreDisp));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(actualBD, 15));
+
     }
 }

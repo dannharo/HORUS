@@ -21,7 +21,7 @@ public class DeviceCrudActivity extends AppCompatActivity {
     EditText textNombre,textNumero,textIMEI,textPassword;
     private DBManager dbManager;
     //Variable que almacena el id del dispositivo seleccionado
-    private int _id;
+    public static int _id;
     String id="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,6 @@ public class DeviceCrudActivity extends AppCompatActivity {
         btnMapa.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(DeviceCrudActivity.this, MapAct.class);
-                intent.putExtra("id_device",id);
                 startActivity(intent);
             }
         });
