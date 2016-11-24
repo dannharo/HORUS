@@ -38,7 +38,7 @@ public class HorusDB extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "horus_devices.db";
 
     // Database Version
-    public static final int DATABASE_VERSION = 5;
+    public static final int DATABASE_VERSION = 6;
 
     // Creating tables query
     private static final String SQL_TABLA_DISPOSITIVOS = "create table "

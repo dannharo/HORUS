@@ -83,11 +83,12 @@ public class DBManager {
         }
         return cursor;
     }
-    public int updateDispositivo(int id, String nombre, String  numero, String  imei){
+    public int updateDispositivo(int id, String nombre, String  numero, String  imei,String password){
         ContentValues contentValue = new ContentValues();
         contentValue.put(HorusDB.T_D_ID,id);
         contentValue.put(HorusDB.T_D_NOMBRE,nombre);
         contentValue.put(HorusDB.T_D_NUMERO,numero);
+        contentValue.put(HorusDB.T_D_PASSWORD,password);
         contentValue.put(HorusDB.T_D_IMEI,imei);
         int i = database.update(HorusDB.TABLA_DISPOSITIVOS,contentValue,HorusDB.T_D_ID +" = "+id,null);
         return i;

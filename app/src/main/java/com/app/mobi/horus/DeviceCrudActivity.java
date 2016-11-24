@@ -83,6 +83,26 @@ public class DeviceCrudActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
+        btnEditar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(DeviceCrudActivity.this);
+                //Metodos del constructor
+                builder.setTitle("Editar Registro");
+                builder.setMessage("¿Desea guardar los cambios?");
+                builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dbManager.updateDispositivo(_id, textNombre.getText().toString(), textNumero.getText().toString(), textIMEI.getText().toString(),textPassword.getText().toString());
+                        Intent intent = new Intent(DeviceCrudActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        Toast.makeText(DeviceCrudActivity.this, "Se editó el registro", Toast.LENGTH_SHORT ).show();
+                    }
+                });
+                builder.setNegativeButton(android.R.string.cancel, null);
+                Dialog dialog = builder.create();
+                dialog.show();
+            }
+        });
 
     }
 }
