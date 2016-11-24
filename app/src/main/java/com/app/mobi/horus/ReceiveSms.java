@@ -32,7 +32,6 @@ public class ReceiveSms extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Bundle bundle = intent.getExtras();
         Object[] objArr = (Object[]) bundle.get("pdus");
-        String sms = "";
         String smsBody = "";
         String originNumber = "";
 
@@ -52,45 +51,23 @@ public class ReceiveSms extends BroadcastReceiver {
             }
             else
             {
-              // try {
-
+               try {
+                    //Se separa el mensaje para obtener la latitud y longitud
                     String[] infoSms = smsBody.split("&");
                     String latLon = infoSms[1].replace("q=", "");
                     String[] infoUbicacion = latLon.split(",");
                     latitud = infoUbicacion[0].trim();
                     longitud = infoUbicacion[1].trim();
-                    sms = latitud + ", " + longitud;
-
-
-                    //Abrimos el layout del mapa
-                  /*  Intent intentMapa = new Intent(context.getApplicationContext(), MapAct.class);
-                    intentMapa.putExtra("longitud", longitud);
-                    intentMapa.putExtra("latitud", latitud);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intentMapa);*/
-
-                Intent intentMapa = new Intent();
-                intentMapa.setClassName("com.app.mobi.horus", "com.app.mobi.horus.MapAct");
-                Toast.makeText(context, "datos:"+ sms, Toast.LENGTH_LONG).show();
-                    intentMapa.putExtra("longitud", longitud);
-                    intentMapa.putExtra("latitud", latitud);
-
-                    intentMapa.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                   context.startActivity(intentMapa);
-
-           /*     Intent i = new Intent();
-                i.setClassName("com.app.mobi.horus", "com.app.mobi.horus.MapAct");
-                //Intent i = new Intent(context, MapAct.class);
-                i.putExtra("longitud", longitud);
-                i.putExtra("latitud", latitud);
-                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                context.startActivity(i);*/
-             /*   }
-                catch (Exception e)
-                {
-                    sms = "Ocurrió un error";
-                }*/
-                //Toast.makeText(context, sms, Toast.LENGTH_LONG).show();
+                   //Se manda a llamar la clase del mapa y se muestra
+                    Intent intMap = new Intent(context,MapAct.class);
+                    intMap.putExtra("longitud", longitud);
+                    intMap.putExtra("latitud", latitud);
+                    intMap.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    context.startActivity(intMap);
+               }
+                catch (Exception e) {
+                    Toast.makeText(context, "OCurrió un error", Toast.LENGTH_LONG).show();
+                }
 
             }
         }
