@@ -1,5 +1,6 @@
 package com.app.mobi.horus;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -62,7 +63,8 @@ public class ReceiveSms extends BroadcastReceiver {
                     Intent intMap = new Intent(context,MapAct.class);
                     intMap.putExtra("longitud", longitud);
                     intMap.putExtra("latitud", latitud);
-                    intMap.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    intMap.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
                     context.startActivity(intMap);
                }
                 catch (Exception e) {

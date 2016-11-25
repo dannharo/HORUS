@@ -67,7 +67,6 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
         Intent objIntent = this.getIntent();
         lat = objIntent.getStringExtra("latitud");
         lon = objIntent.getStringExtra("longitud");
-
         //Leer mensaje
      /*   IntentFilter filter = new IntentFilter("android.provider.Telephony.SMS_RECEIVED");
         receiver = new BroadcastReceiver() {
@@ -191,12 +190,12 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
 
         if ((lat != null) && (lon != null))
         {
+            //Se guarda en la tabla la ubicacion actual
+            dbmanager.updateDispositivo(idDisp, Double.parseDouble(lat), Double.parseDouble(lon));
             //Muestra en el mapa la ubicación obtenida del sms gps
             LatLng actual = new LatLng(Double.parseDouble(lat), Double.parseDouble(lon));
             mMap.addMarker(new MarkerOptions().position(actual).title("Actual"));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(actual, 15));
-            //Se guarda en la tabla la ubicacion actual
-             dbmanager.updateDispositivo(idDisp, Double.parseDouble(lat), Double.parseDouble(lon));
         }
         else
         {

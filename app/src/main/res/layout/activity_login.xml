@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:text="horus"/>
+        android:text=""/>
     <TextView
     android:layout_width="wrap_content"
     android:text="Contraseña"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:layout_marginBottom="10dp"
-        android:text="M0B1H0RU5"/>
+        android:text=""/>
     <TextView
         android:id="@+id/textMensaje"
         android:layout_width="wrap_content"
@@ -34,6 +34,14 @@
         android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content"
         android:visibility="invisible"/>
+    <CheckBox
+        android:id="@+id/checkGuardaLogin"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textMensaje"
+        android:text="Recordar contraseña"
+         />
     <Button
         android:text="Entrar"
         android:layout_width="match_parent"
