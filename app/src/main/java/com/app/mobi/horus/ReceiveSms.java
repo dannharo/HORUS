@@ -79,6 +79,7 @@ public class ReceiveSms extends BroadcastReceiver {
                         Toast.makeText(context, "Alarma", Toast.LENGTH_LONG).show();
                         Intent intentAlert = new Intent(context,NotifyActivity.class);
                         intentAlert.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        context.startActivity(intentAlert);
                     }
                     else if(smsBody.contains("http://maps.google.com"))
                     {
