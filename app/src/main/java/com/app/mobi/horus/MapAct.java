@@ -31,19 +31,17 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
     Mensaje sms = new Mensaje(this);
     NotifyActivity alarma = new NotifyActivity();
     //Declaración de variables
-    String contraseña ="123456";
     String mensaje="";
-    String noTelefono = "3121884228";
-    //BroadcastReceiver receiver = null;
     String lat="";
     String lon="";
     //Almacena la latitud y longitud que actualmente estan almacenados en la base de datos
     Double latActual = 0.0;
     Double lonActual=0.0;
     private DBManager dbmanager;
-    //Almacena el id del dispositivo
+    //Almacena datos del dispositivo
     int idDisp = DeviceCrudActivity._id;
-
+    String contraseña =DeviceCrudActivity.contrasena;
+    String noTelefono = DeviceCrudActivity.telGps;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

@@ -22,6 +22,8 @@ public class DeviceCrudActivity extends AppCompatActivity {
     private DBManager dbManager;
     //Variable que almacena el id del dispositivo seleccionado
     public static int _id;
+    //Variables donde se almacenan los datos del dispositivo
+    public static String nombre, telGps, contrasena;
     String id="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +47,14 @@ public class DeviceCrudActivity extends AppCompatActivity {
         //textNombre.setText(id);
         if(cursor.moveToFirst()){
             while(!cursor.isAfterLast()){
-                textNombre.setText(cursor.getString(cursor.getColumnIndex(HorusDB.T_D_NOMBRE)));
-                textNumero.setText(cursor.getString(cursor.getColumnIndex(HorusDB.T_D_NUMERO)));
+                //Almacena en las variables la información
+                nombre = cursor.getString(cursor.getColumnIndex(HorusDB.T_D_NOMBRE));
+                telGps = cursor.getString(cursor.getColumnIndex(HorusDB.T_D_NUMERO));
+                contrasena =cursor.getString(cursor.getColumnIndex(HorusDB.T_D_PASSWORD));
+                textNombre.setText(nombre);
+                textNumero.setText(telGps);
                 textIMEI.setText(cursor.getString(cursor.getColumnIndex(HorusDB.T_D_IMEI)));
-                textPassword.setText(cursor.getString(cursor.getColumnIndex(HorusDB.T_D_PASSWORD)));
+                textPassword.setText(contrasena);
                 cursor.moveToNext();
             }
         }
