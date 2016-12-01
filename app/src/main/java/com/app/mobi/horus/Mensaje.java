@@ -24,7 +24,7 @@ public class Mensaje extends AppCompatActivity {
         c = context;
         }
     public void enviarMensaje(String telefono, String Mensaje) {
-
+    Toast.makeText(c, telefono+", "+ Mensaje, Toast.LENGTH_LONG).show();
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(
                 telefono,
@@ -38,7 +38,6 @@ public class Mensaje extends AppCompatActivity {
 
     public void permisoMensaje() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(c, "Permission is not granted, requesting", Toast.LENGTH_LONG).show();
             //Log.d("PLAYGROUND", "Permission is not granted, requesting");
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 123);
         } else {
