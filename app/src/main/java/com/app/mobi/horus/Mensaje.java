@@ -24,7 +24,6 @@ public class Mensaje extends AppCompatActivity {
         c = context;
         }
     public void enviarMensaje(String telefono, String Mensaje) {
-    Toast.makeText(c, telefono+", "+ Mensaje, Toast.LENGTH_LONG).show();
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(
                 telefono,

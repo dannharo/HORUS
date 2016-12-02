@@ -32,8 +32,6 @@ public class ReceiveSms extends BroadcastReceiver {
     String latitud = "";
     String longitud = "";
     private DBManager dbManager;
-    ArrayList<String> telefonosGps = new ArrayList<String>();
-    int totalGps=0;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -44,16 +42,8 @@ public class ReceiveSms extends BroadcastReceiver {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        Cursor cursor = dbManager.fetchDispositivos();
-        if(cursor.moveToFirst()){
-            while(!cursor.isAfterLast()){
-                //Almacena en las variables la información
-                telefonosGps.add(cursor.getString(cursor.getColumnIndex(HorusDB.T_D_NUMERO)));
-                cursor.moveToNext();
-                totalGps++;
-            }
-        }
-        cursor.close();
+       // Cursor cursor = dbManager.fetchDispositivos();
+
         Bundle bundle = intent.getExtras();
         Object[] objArr = (Object[]) bundle.get("pdus");
         String smsBody = "";
@@ -65,13 +55,14 @@ public class ReceiveSms extends BroadcastReceiver {
             originNumber = smsMsg.getDisplayOriginatingAddress();
 
         }
-        if (telefonosGps.size() >0)
+        //MainActivity.telefonosGps obtiene el listado de los numero de telefono de los gps
+        if (MainActivity.telefonosGps.size() >0)
         {
             //Se compara para ver si el mensaje pertenece a uno de los numeros del gps
-            for (int i =0; i< telefonosGps.size(); i++)
+            for (int i =0; i< MainActivity.telefonosGps.size(); i++)
             {
                 //Si el mensaje pertenece a uno de los numeros del gps, se muestra el mapa
-                if (originNumber.equals(telefonosGps.get(i))) {
+                if (originNumber.equals(MainActivity.telefonosGps.get(i))) {
                     //Toast.makeText(context, smsBody, Toast.LENGTH_LONG).show();
                     //Se verifica que sea un mensaje de sensor alarma
                     if (smsBody.contains("sensor alarm!")) {

@@ -26,6 +26,7 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private SimpleCursorAdapter adapter;
     final String[] from = new String[]{HorusDB.T_D_NOMBRE,HorusDB.T_D_ID};
     final int[] to = new int[]{R.id.lvnombre,R.id.lvid};
-
+    public static ArrayList<String> telefonosGps = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,13 @@ public class MainActivity extends AppCompatActivity {
         usuario.close();
         Toast.makeText(this, user+", "+pass+", "+name, Toast.LENGTH_LONG).show();*/
         Cursor cursor = dbmanager.fetchDispositivos();
+        if(cursor.moveToFirst()){
+            while(!cursor.isAfterLast()){
+                //Almacena en las variables la información
+                telefonosGps.add(cursor.getString(cursor.getColumnIndex(HorusDB.T_D_NUMERO)));
+                cursor.moveToNext();
+            }
+        }
         listview = (ListView) findViewById(R.id.listDispositivos);
         listview.setEmptyView(findViewById(R.id.empty));
         adapter = new SimpleCursorAdapter(this,R.layout.list_dispositivos,cursor,from,to,0);

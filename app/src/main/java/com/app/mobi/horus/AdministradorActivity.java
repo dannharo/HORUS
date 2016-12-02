@@ -15,9 +15,9 @@ public class AdministradorActivity extends AppCompatActivity {
 
     Mensaje sms = new Mensaje(this);
     //Declaración de variables
-    String contraseña ="123456";
+    String contraseña =DeviceCrudActivity.contrasena;
     String mensaje;
-    String noTelGps = "3121105454";
+    String noTelGps = DeviceCrudActivity.telGps;
     private DBManager dbmanager;
 
     EditText nombre, noTelefono;
