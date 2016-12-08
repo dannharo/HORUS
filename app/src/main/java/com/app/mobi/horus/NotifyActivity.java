@@ -1,5 +1,6 @@
 package com.app.mobi.horus;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Notification;
@@ -16,11 +17,10 @@ import android.support.v7.app.NotificationCompat;
 import android.view.View;
 import android.widget.Toast;
 
-public class NotifyActivity extends DialogFragment {
+public class NotifyActivity extends Activity {
 
     private MediaPlayer mp;
-    private boolean alertIsOpen = false;
-  /*  @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notify);
@@ -38,19 +38,11 @@ public class NotifyActivity extends DialogFragment {
         //Se reproduce el sonido de la alerta
         mp = MediaPlayer.create(NotifyActivity.this, R.raw.alerta1);
         mp.start();
-        if (alertIsOpen) return;
-        alertIsOpen = true;
         //se crea y muestra el cuadro de dialogo
         Dialog dialog = builder.create();
         dialog.show();
     }
-
-    public void mostrarAlerta()
-    {
-        //Se crea el contructor de los cuadros de dialogo
-
-    }*/
-  @Override
+  /*@Override
   public Dialog onCreateDialog(Bundle savedInstanceState) {
 
       AlertDialog.Builder builder =
@@ -65,6 +57,6 @@ public class NotifyActivity extends DialogFragment {
               });
 
       return builder.create();
-  }
+  }*/
 
 }

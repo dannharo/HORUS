@@ -1,10 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
 
-    <item android:id="@+id/admin" android:title="@string/item1"></item>
-    <item android:id="@+id/armado" android:title="@string/item3"></item>
-    <item android:id="@+id/alarma" android:title="@string/item4"></item>
-    <item android:id="@+id/reiniciar" android:title="@string/item5"></item>
+    <item
+        android:id="@+id/admin"
+        android:title="@string/item1"
+        app:showAsAction="never">
+    </item>
+    <item
+        android:id="@+id/armado"
+        android:title="@string/item3"
+        app:showAsAction="never">
+    </item>
+    <item
+        android:id="@+id/alarma"
+        android:title="@string/item4"
+        app:showAsAction="never">
+    </item>
+    <item
+        android:id="@+id/reiniciar"
+        android:title="@string/item5"
+        app:showAsAction="never">
+    </item>
+    <item
+        android:id="@+id/ajustes"
+        android:title="@string/item6"
+        app:showAsAction="never">
+    </item>
+
 </menu>

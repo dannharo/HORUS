@@ -42,7 +42,7 @@ public class ReceiveSms extends BroadcastReceiver {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-       // Cursor cursor = dbManager.fetchDispositivos();
+        // Cursor cursor = dbManager.fetchDispositivos();
 
         Bundle bundle = intent.getExtras();
         Object[] objArr = (Object[]) bundle.get("pdus");
@@ -56,57 +56,55 @@ public class ReceiveSms extends BroadcastReceiver {
 
         }
         //MainActivity.telefonosGps obtiene el listado de los numero de telefono de los gps
-        if (MainActivity.telefonosGps.size() >0)
-        {
-            //Se compara para ver si el mensaje pertenece a uno de los numeros del gps
-            for (int i =0; i< MainActivity.telefonosGps.size(); i++)
-            {
-                //Si el mensaje pertenece a uno de los numeros del gps, se muestra el mapa
-                if (originNumber.equals(MainActivity.telefonosGps.get(i))) {
-                    //Toast.makeText(context, smsBody, Toast.LENGTH_LONG).show();
-                    //Se verifica que sea un mensaje de sensor alarma
-                    if (smsBody.contains("sensor alarm!")) {
-                        //Se muestra el cuadro de dialogo con la alarma
-                        Toast.makeText(context, "Alarma", Toast.LENGTH_LONG).show();
-                        Intent intentAlert = new Intent(context,NotifyActivity.class);
-                        intentAlert.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        context.startActivity(intentAlert);
-                    }
-                    else if(smsBody.contains("http://maps.google.com"))
-                    {
-                        try {
-                            Toast.makeText(context, "Mapa", Toast.LENGTH_LONG).show();
-                            //Se separa el mensaje para obtener la latitud y longitud
-                            String[] infoSms = smsBody.split("&");
-                            String latLon = infoSms[1].replace("q=", "");
-                            String[] infoUbicacion = latLon.split(",");
-                            latitud = infoUbicacion[0].trim();
-                            longitud = infoUbicacion[1].trim();
-                            //Se manda a llamar la clase del mapa y se muestra
-                            Intent intMap = new Intent(context,MapAct.class);
-                            intMap.putExtra("longitud", longitud);
-                            intMap.putExtra("latitud", latitud);
-                            intMap.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        // if (MainActivity.telefonosGps.size() >0)
+        // {
+        //Se compara para ver si el mensaje pertenece a uno de los numeros del gps
+        //  for (int i =0; i< MainActivity.telefonosGps.size(); i++)
+        // {
+        //Si el mensaje pertenece a uno de los numeros del gps, se muestra el mapa
+        //if (originNumber.equals(MainActivity.telefonosGps.get(i))) {
+        if (originNumber.equals("3121884228")) {
+            //Toast.makeText(context, smsBody, Toast.LENGTH_LONG).show();
+            //Se verifica que sea un mensaje de sensor alarma
+            if (smsBody.contains("sensor alarm!")) {
+                //Se muestra el cuadro de dialogo con la alarma
+                Toast.makeText(context, "Alarma", Toast.LENGTH_LONG).show();
+                Intent intentAlert = new Intent(context, NotifyActivity.class);
+                intentAlert.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                context.startActivity(intentAlert);
+            } else if (smsBody.contains("http://maps.google.com")) {
+                try {
+                    Toast.makeText(context, "Mapa", Toast.LENGTH_LONG).show();
+                    //Se separa el mensaje para obtener la latitud y longitud
+                    String[] infoSms = smsBody.split("&");
+                    String latLon = infoSms[1].replace("q=", "");
+                    String[] infoUbicacion = latLon.split(",");
+                    latitud = infoUbicacion[0].trim();
+                    longitud = infoUbicacion[1].trim();
+                    //Se manda a llamar la clase del mapa y se muestra
+                    Intent intMap = new Intent(context, MapAct.class);
+                    intMap.putExtra("longitud", longitud);
+                    intMap.putExtra("latitud", latitud);
+                    intMap.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-                            context.startActivity(intMap);
-                        }
-                        catch (Exception e) {
-                            Toast.makeText(context, "OCurrió un error", Toast.LENGTH_LONG).show();
-                        }
+                    context.startActivity(intMap);
+                } catch (Exception e) {
+                    Toast.makeText(context, "OCurrió un error", Toast.LENGTH_LONG).show();
+                }
 
-                    }
-                    //terminamos el ciclo para que no continue buscando
-                    break;
+            }
+            //terminamos el ciclo para que no continue buscando
+                /*    break;
                 }
                 else
                 {
                     continue;
-                }
-            }
+                }*/
+            //  }
+            // }
+
+
         }
-
-
     }
-
 }
 

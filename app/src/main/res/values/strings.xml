@@ -5,7 +5,8 @@
     <string name="item3">Armado</string>
     <string name="item4">Alarmas</string>
     <string name="item5">Reiniciar</string>
-    <string name="version_tag">version 0.0.5</string>
+    <string name="item6">Configuración</string>
+    <string name="version_tag">version 0.0.6</string>
     <string name="btn_list">Configurar</string>
     <string name="title_activity_map">Map</string>
     <string name="nombre_tag">Nombre:</string>

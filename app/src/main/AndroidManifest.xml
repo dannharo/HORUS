@@ -62,7 +62,8 @@
             android:exported="true" />
 
         <activity android:name=".DeviceCrudActivity" />
-        <activity android:name=".AdminCrudActivity"></activity>
+        <activity android:name=".AdminCrudActivity" />
+        <activity android:name=".ConfiguracionActivity"></activity>
     </application>
 
 </manifest>

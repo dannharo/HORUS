@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -123,55 +125,24 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-
-
-
-
     }
-   /* public void onClick(View v)
-    {
-        switch (v.getId()) {
-            case R.id.imageButton:
-                Intent myIntent = new Intent(this, DispositivoActivity.class);
-                startActivityForResult(myIntent, 0);
-        }
-    }*/
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
 
-
-    //Adapter
-/*    private class MyListAdapter extends ArrayAdapter<String>{
-        private int layout;
-        private MyListAdapter(Context context, int resource, List<String> objects)
-        {
-            super(context, resource, objects);
-            layout = resource;
-        }
-        @Override
-        public View getView(final int position, View convertView, ViewGroup parent)
-        {
-            ViewHolder mainViewHolder = null;
-            if(convertView == null)
-            {
-                LayoutInflater inflater = LayoutInflater.from(getContext());
-                convertView = inflater.inflate(layout, parent, false);
-                ViewHolder viewHolder = new  ViewHolder();
-                viewHolder.btnConfigurar = (Button)convertView.findViewById(R.id.childButton);
-                viewHolder.btnConfigurar.setOnClickListener(new View.OnClickListener(){
-                        @Override
-                    public void onClick(View v){
-                        Toast.makeText(getContext(), "Configuración de dispositivo"+ position, Toast.LENGTH_LONG).show();
-                    }
-                });
-                convertView.setTag(viewHolder);
-
-            }
-
-            return super.getView(position, convertView, parent);
-        }
-
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_conf, menu);
+        return true;
     }
-    public class ViewHolder
-    {
-        Button btnConfigurar;
-    }*/
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.ajustes) {
+            Intent intent1 = new Intent(this, ConfiguracionActivity.class);
+            this.startActivity(intent1);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

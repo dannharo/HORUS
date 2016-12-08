@@ -24,6 +24,7 @@ public class DeviceCrudActivity extends AppCompatActivity {
     public static int _id;
     //Variables donde se almacenan los datos del dispositivo
     public static String nombre, telGps, contrasena;
+    public static int alarmSensor, alarmBateria;
     String id="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,8 @@ public class DeviceCrudActivity extends AppCompatActivity {
                 textNumero.setText(telGps);
                 textIMEI.setText(cursor.getString(cursor.getColumnIndex(HorusDB.T_D_IMEI)));
                 textPassword.setText(contrasena);
+                alarmSensor = Integer.parseInt(cursor.getString(cursor.getColumnIndex(HorusDB.T_D_ALARMA_MOVIMIENTO)));
+                alarmBateria = Integer.parseInt(cursor.getString(cursor.getColumnIndex(HorusDB.T_D_ALARMA_BATERIA)));
                 cursor.moveToNext();
             }
         }

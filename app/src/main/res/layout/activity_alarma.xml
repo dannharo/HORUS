@@ -20,7 +20,8 @@
         android:id="@+id/toggleAlarmMov"
         android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp" />
+        android:layout_marginTop="28dp"
+        android:onClick="toggleClickSensor"/>
 
     <ToggleButton
         android:layout_width="wrap_content"
@@ -30,7 +31,8 @@
         android:layout_below="@+id/textView3"
         android:layout_alignLeft="@+id/toggleAlarmMov"
         android:layout_alignStart="@+id/toggleAlarmMov"
-        android:layout_marginTop="29dp" />
+        android:layout_marginTop="29dp"
+        android:onClick="toggleClickBateria"/>
 
     <TextView
         android:layout_width="wrap_content"
