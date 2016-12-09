@@ -44,7 +44,6 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
     String noTelefono = DeviceCrudActivity.telGps;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         //Se crea instancia con la clase que contiene la base de datos
         dbmanager = new DBManager(this);
         try {
@@ -65,68 +64,7 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
         Intent objIntent = this.getIntent();
         lat = objIntent.getStringExtra("latitud");
         lon = objIntent.getStringExtra("longitud");
-        //Leer mensaje
-     /*   IntentFilter filter = new IntentFilter("android.provider.Telephony.SMS_RECEIVED");
-        receiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context arr0, Intent arr1) {
-                processReceive(arr0, arr1);
-            }
-        };
-        registerReceiver(receiver, filter);*/
     }
-    //Funciones para recibir mensaje de texto
-  /*  protected void onDestroy(){
-        super.onDestroy();
-        unregisterReceiver(receiver);
-    }*/
-  /*  public void processReceive(Context context, Intent intent)
-    {
-
-        //TextView lbs = (TextView)findViewById(R.id.textView3);
-        Bundle bundle = intent.getExtras();
-        Object[] objArr =(Object[])bundle.get("pdus");
-        String sms = "";
-        String smsBody ="";
-        String originNumber = "";
-
-        for(int i= 0; i<objArr.length; i++)
-        {
-            SmsMessage smsMsg = SmsMessage.createFromPdu((byte[])objArr[i]);
-            smsBody = smsMsg.getMessageBody();
-            originNumber = smsMsg.getDisplayOriginatingAddress();
-
-        }
-        if (originNumber.equals(noTelefono)) {
-            //Separamos la cadena para obtener la latitud y longitud
-            try {
-
-                String[] infoSms = smsBody.split("&");
-                String latLon = infoSms[1].replace("q=", "");
-                String[] infoUbicacion = latLon.split(",");
-                latitud = infoUbicacion[0].trim();
-                longitud = infoUbicacion[1].trim();
-                sms = latitud + ", " + longitud;
-            }
-            catch (Exception e)
-            {
-                sms = "Ocurrió un error";
-            }
-            Toast.makeText(context, sms, Toast.LENGTH_LONG).show();
-
-            //limpia el marcador actual
-            mMap.clear();
-            //Agrega el nuevo marcador con la mieva posición
-            LatLng posAct = new LatLng(Double.parseDouble(latitud), Double.parseDouble(longitud));
-            mMap.addMarker(new MarkerOptions().position(posAct).title("Posición actual"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(posAct, 15));
-
-            //sms += "From : " + originNumber + "\ncontent: " + smsBody;
-        }
-
-        //lbs.setText(sms);
-    }*/
-
 
     //Menu
     @Override
@@ -136,37 +74,16 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return  true;
     }
-    //Depende la opciòn seleccionada en el menu, se ejecturà una determinada actividad
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.admin) {
-            Intent intent1 = new Intent(this,ListAdminActivity.class);
+        if (id == R.id.ajustes) {
+            Intent intent1 = new Intent(this, ConfiguracionActivity.class);
+            intent1.putExtra("activity", "mapa");
             this.startActivity(intent1);
             return true;
         }
-        if (id == R.id.armado) {
-           // mensaje = "arm"+contraseña;
-            //sms.enviarMensaje(noTelefono, mensaje);
-            //Toast.makeText(this, "Armar dispositivo", Toast.LENGTH_LONG).show();
-            Intent intentAlert = new Intent(this, NotifyActivity.class);
-            this.startActivity(intentAlert);
-            //alarma.mostrarAlerta();
-            return true;
-        }
-        if (id == R.id.alarma) {
-            Intent intent4 = new Intent(this,PopAlarma.class);
-            this.startActivity(intent4);
-            return true;
-        }
-        if (id == R.id.reiniciar) {
-            mensaje = "reset"+contraseña;
-            sms.enviarMensaje(noTelefono, mensaje);
-            //Toast.makeText(this, "Reiniciar dispositivo", Toast.LENGTH_LONG).show();
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
     /**

@@ -25,7 +25,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
         <activity android:name=".DispositivoActivity" />
-        <activity android:name=".MapaActivity" />
         <activity android:name=".ContrasenaActivity" />
         <activity android:name=".AdministradorActivity" />
         <activity
@@ -45,25 +44,25 @@
 
         <activity
             android:name=".MapAct"
-            android:label="@string/title_activity_map" />
-        <activity android:name=".ListAdminActivity" />
-        <activity android:name=".LoginActivity">
+            android:label="@string/title_activity_map">
+        </activity>
+        <activity android:name=".ListAdminActivity" android:label="@string/title_activity_admin"/>
+        <activity android:name=".LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NotifyActivity" />
-
+        <activity android:name=".NotifyActivity" android:theme="@style/NoActionBar"/>
         <service
             android:name=".ServiceCommunicator"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".DeviceCrudActivity" />
-        <activity android:name=".AdminCrudActivity" />
-        <activity android:name=".ConfiguracionActivity"></activity>
+        <activity android:name=".DeviceCrudActivity" android:label="@string/title_activity_dispositivo" />
+        <activity android:name=".AdminCrudActivity" android:label="@string/title_activity_adminCrud" />
+        <activity android:name=".ConfiguracionActivity" android:label="@string/title_activity_cofiguracion"/>
+        <activity android:name=".InformacionActivity" android:label="@string/title_activity_info"></activity>
     </application>
 
 </manifest>

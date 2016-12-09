@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     final String[] from = new String[]{HorusDB.T_D_NOMBRE,HorusDB.T_D_ID};
     final int[] to = new int[]{R.id.lvnombre,R.id.lvid};
     public static ArrayList<String> telefonosGps = new ArrayList<String>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_conf, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
     @Override
@@ -139,10 +138,14 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.ajustes) {
             Intent intent1 = new Intent(this, ConfiguracionActivity.class);
+            intent1.putExtra("activity", "home");
             this.startActivity(intent1);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
-
+    //Evita que se valla hacia atras y se vea el login nuevamente
+    @Override
+    public void onBackPressed() {
+    }
 }

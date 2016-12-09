@@ -8,7 +8,14 @@
     <string name="item6">Configuración</string>
     <string name="version_tag">version 0.0.6</string>
     <string name="btn_list">Configurar</string>
-    <string name="title_activity_map">Map</string>
+    <string name="title_activity_map">Mapa ubicación</string>
+    <string name="title_activity_admin">Administradores</string>
+    <string name="title_activity_adminCrud">Detalles administrador</string>
+    <string name="title_activity_cofiguracion">Configuración</string>
+    <string name="title_activity_contrasena">Cambiar contraseña</string>
+    <string name="title_activity_dispositivo">Detalles dispositivo</string>
+    <string name="title_activity_home">Horus</string>
+    <string name="title_activity_info">Información</string>
     <string name="nombre_tag">Nombre:</string>
     <string name="numero_tag">Número:</string>
     <string name="IMEI_tag">IMEI:</string>
