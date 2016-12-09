@@ -12,16 +12,10 @@ import android.widget.Toast;
 
 public class ConfiguracionActivity extends AppCompatActivity {
 
-    private String opcionesConfiguracion[]=new String[]{"Cambiar contraseña", "Administradores", "Alarmas", "Armar", "Desarmar", "Reiniciar","Información"};
-    private Integer[] iconOpcion={
-            R.drawable.ic_action_secure,
-            R.drawable.ic_action_person,
-            R.drawable.ic_action_alarms,
-            R.drawable.ic_action_merge,
-            R.drawable.ic_action_import_export,
-            R.drawable.ic_action_refresh,
-            R.drawable.ic_action_about
-    };
+    private String opcionesConfiguracion[];
+    //Array para almacenar los iconos de las opciones
+    private Integer[] iconOpcion;
+    private String activity ="";
     private ListView lista;
     private String mensaje;
     Mensaje sms = new Mensaje(this);
@@ -30,7 +24,43 @@ public class ConfiguracionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Toast.makeText(this, MainActivity.currentLayout, Toast.LENGTH_LONG).show();
+        //Obtiene los datos enviados
+        Intent objIntent = this.getIntent();
+        activity = objIntent.getStringExtra("activity");
+        if (activity.equals("mapa"))
+        {
+            //Array para almacenar las opciones del menu
+            opcionesConfiguracion=new String[7];
+            //Se agrega al array las opciones para el menu
+            opcionesConfiguracion[0]="Cambiar contraseña";
+            opcionesConfiguracion[1]="Administradores";
+            opcionesConfiguracion[2]="Alarmas";
+            opcionesConfiguracion[3]="Armar";
+            opcionesConfiguracion[4]="Desarmar";
+            opcionesConfiguracion[5]="Reiniciar";
+            opcionesConfiguracion[6]="Información";
+            //Iconos del menu
+            iconOpcion = new Integer[7];
+            iconOpcion[0] =  R.drawable.ic_action_secure;
+            iconOpcion[1] =  R.drawable.ic_action_person;
+            iconOpcion[2] =  R.drawable.ic_action_alarms;
+            iconOpcion[3] =  R.drawable.ic_action_merge;
+            iconOpcion[4] =  R.drawable.ic_action_import_export;
+            iconOpcion[5] =  R.drawable.ic_action_refresh;
+            iconOpcion[6] =  R.drawable.ic_action_about;
+        }
+        else
+        {
+            opcionesConfiguracion=new String[2];
+            //Se agrega al array las opciones para el menu en el home
+            opcionesConfiguracion[0]="Cambiar contraseña";
+            opcionesConfiguracion[1]="Información";
+            //Iconos del menu
+            iconOpcion = new Integer[2];
+            iconOpcion[0] =  R.drawable.ic_action_secure;
+            iconOpcion[1] =  R.drawable.ic_action_about;
+
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracion);
         OpcionList adapter=new OpcionList(this,opcionesConfiguracion,iconOpcion);
@@ -58,12 +88,12 @@ public class ConfiguracionActivity extends AppCompatActivity {
                     case "Armar":
                         //Envia mensaje para armar dispositivo;
                         mensaje = "arm"+contrasena;
-                        sms.enviarMensaje(telefono, contrasena);
+                        sms.enviarMensaje(telefono, mensaje);
                         break;
                     case "Desarmar":
                         //Envia mensaje para desarmar dispositivo
                         mensaje = "disarm"+contrasena;
-                        sms.enviarMensaje(telefono, contrasena);
+                        sms.enviarMensaje(telefono, mensaje);
                         break;
                     case "Reiniciar":
                         //Envia mensaje para reiniciar el dispositivo

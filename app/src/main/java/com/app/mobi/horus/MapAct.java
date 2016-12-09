@@ -134,7 +134,7 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
             // (numero de veces que se quiere obtener la posicion cada 30segunds)+contraseña
             mensaje = "fix030s001n"+contraseña;
             //Se manda mensaje para obtener la ubicación del gps
-            //sms.enviarMensaje(noTelefono, mensaje);
+            sms.enviarMensaje(noTelefono, mensaje);
         }
 
     }
