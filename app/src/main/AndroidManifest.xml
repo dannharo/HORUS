@@ -25,7 +25,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
         <activity android:name=".DispositivoActivity" />
-        <activity android:name=".ContrasenaActivity" />
+        <activity android:name=".ContrasenaActivity" android:label="Cambiar contraseña"/>
         <activity android:name=".AdministradorActivity" />
         <activity
             android:name=".PopAlarma"
@@ -53,7 +53,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NotifyActivity" android:theme="@style/NoActionBar"/>
+        <activity android:name=".NotifyActivity"></activity>
+
         <service
             android:name=".ServiceCommunicator"
             android:enabled="true"

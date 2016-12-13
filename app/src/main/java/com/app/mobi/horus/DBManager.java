@@ -35,7 +35,7 @@ public class DBManager {
         contentValue.put(HorusDB.T_D_LONGITUD,longitud);
         contentValue.put(HorusDB.T_D_NUMERO,numero);
         contentValue.put(HorusDB.T_D_PASSWORD,pass);
-        database.insert(HorusDB.TABLA_DISPOSITIVOS,null,contentValue);
+        database.insert(HorusDB.TABLA_DISPOSITIVOS, null, contentValue);
     }
     public void insertUsuario(String usuario, String password, String nombre){
         ContentValues contentValue = new ContentValues();
@@ -91,7 +91,7 @@ public class DBManager {
         contentValue.put(HorusDB.T_D_NUMERO,numero);
         contentValue.put(HorusDB.T_D_PASSWORD,password);
         contentValue.put(HorusDB.T_D_IMEI,imei);
-        int i = database.update(HorusDB.TABLA_DISPOSITIVOS,contentValue,HorusDB.T_D_ID +" = "+id,null);
+        int i = database.update(HorusDB.TABLA_DISPOSITIVOS, contentValue, HorusDB.T_D_ID + " = " + id, null);
         return i;
     }
     public int updateUsuarios(int id,String usuario, String password, String nombre){
@@ -148,6 +148,19 @@ public class DBManager {
         }
         cursor.moveToFirst();
         String password= cursor.getString(cursor.getColumnIndex(HorusDB.T_U_PASSWORD));
+        cursor.close();
+        return password;
+    }
+    public String getPassword(String password)
+    {
+        Cursor cursor=database.query(HorusDB.TABLA_USUARIOS, null,HorusDB.T_U_PASSWORD+ " =?", new String[]{password}, null, null, null);
+        if(cursor.getCount()<1) // password Not Exist
+        {
+            cursor.close();
+            return "NOT EXIST";
+        }
+        cursor.moveToFirst();
+        String contrasena= cursor.getString(cursor.getColumnIndex(HorusDB.T_U_PASSWORD));
         cursor.close();
         return password;
     }

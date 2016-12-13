@@ -79,13 +79,18 @@ public class LoginActivity extends AppCompatActivity {
                 //Se comparan los datos ingresados por el usuario con los guardados en la base de datos
                 String resultado = dbmanager.getPassLogin(user);
                 if (resultado != "NOT EXIST") {
-                    Toast.makeText(getApplicationContext(),
-                            "Datos correctos", Toast.LENGTH_SHORT).show();
-                    //Se abre la nueva ventana, con el listado de dispositivos
-                    Intent myIntent = new Intent(v.getContext(), MainActivity.class);
-                    startActivityForResult(myIntent, 0);
+                    //Compara el password
+                    if (resultado.equals(pass)) {
+                        //Se abre la nueva ventana, con el listado de dispositivos
+                        Intent myIntent = new Intent(v.getContext(), MainActivity.class);
+                        startActivityForResult(myIntent, 0);
+                    }
+                    else
+                    {
+                        mnsError.setVisibility(View.VISIBLE);
+                        mnsError.setBackgroundColor(Color.RED);
+                    }
                 } else {
-                    Toast.makeText(getApplicationContext(), "Error!", Toast.LENGTH_SHORT).show();
                     mnsError.setVisibility(View.VISIBLE);
                     mnsError.setBackgroundColor(Color.RED);
                 }

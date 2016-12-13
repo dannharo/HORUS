@@ -70,14 +70,21 @@ public class ReceiveSms extends BroadcastReceiver {
                      //Toast.makeText(context, smsBody, Toast.LENGTH_LONG).show();
                      //Se verifica que sea un mensaje de sensor alarma
                      if (smsBody.contains("sensor alarm!")) {
+                         //Se obtiene la latitud y longitud
+                         String[] infoSms = smsBody.split("&");
+                         String latLon = infoSms[1].replace("q=", "");
+                         String[] infoUbicacion = latLon.split(",");
+                         latitud = infoUbicacion[0].trim();
+                         longitud = infoUbicacion[1].trim();
                          //Se muestra el cuadro de dialogo con la alarma
-                         Toast.makeText(context, "Alarma", Toast.LENGTH_LONG).show();
                          Intent intentAlert = new Intent(context, NotifyActivity.class);
+                         intentAlert.putExtra("longitud", longitud);
+                         intentAlert.putExtra("latitud", latitud);
                          intentAlert.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                          context.startActivity(intentAlert);
+
                      } else if (smsBody.contains("http://maps.google.com")) {
                          try {
-                             Toast.makeText(context, "Mapa", Toast.LENGTH_LONG).show();
                              //Se separa el mensaje para obtener la latitud y longitud
                              String[] infoSms = smsBody.split("&");
                              String latLon = infoSms[1].replace("q=", "");

@@ -20,21 +20,40 @@ import android.widget.Toast;
 public class NotifyActivity extends Activity {
 
     private MediaPlayer mp;
+    private String lat, lon;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Intent, obtiene los datos enviados por la clase ReceiveSms
+        Intent objIntent = this.getIntent();
+        lat = objIntent.getStringExtra("latitud");
+        lon = objIntent.getStringExtra("longitud");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notify);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //bloquea el boton atras del celular
+        builder.setCancelable(false);
         //Metodos del constructor
         builder.setTitle("Alarma de movimiento");
         builder.setMessage("Mensaje de prueba para la alerta de movimiento!");
         builder.setPositiveButton("Ver", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(NotifyActivity.this, "Acepto la alerta", Toast.LENGTH_SHORT).show();
+                //Abre el mapa mostrando la ubicación actual del dispositivo
+                Intent intMap = new Intent(NotifyActivity.this, MapAct.class);
+                intMap.putExtra("longitud", lon);
+                intMap.putExtra("latitud", lat);
+                intMap.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intMap);
+                //Cierra todas las activity
+                finish();
             }
         });
-        builder.setNegativeButton(android.R.string.cancel, null);
+        builder.setNegativeButton("Cerrar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+               finish();
+            }
+        });
         //Se reproduce el sonido de la alerta
         mp = MediaPlayer.create(NotifyActivity.this, R.raw.alerta1);
         mp.start();
