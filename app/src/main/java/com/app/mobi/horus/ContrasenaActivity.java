@@ -65,17 +65,18 @@ public class ContrasenaActivity extends AppCompatActivity {
                 else
                 {
                     //Se obtiene el pass actual y se compara con el ingresado por el usuario
-                    String resultado = dbmanager.getPassword(passAct);
-                    if (resultado.equals("NOT EXIST")) {
+                    String idUser = dbmanager.getPassword(passAct);
+                    if (idUser.equals("NOT EXIST")) {
                         editPassAnt.setError("La contraseña no existe");
                         return;
 
                     }
                     //Se valida que el nuevo password coincida
-                    if (nuevoPass1.equals(nuevoPass2))
+                    else if (nuevoPass1.equals(nuevoPass2))
                     {
                         //Se guarda la nueva contraseña
-                        Toast.makeText(ContrasenaActivity.this, "Se editó el registro", Toast.LENGTH_SHORT ).show();
+                        dbmanager.updateUsuarios(Integer.parseInt(idUser), nuevoPass1);
+                        Toast.makeText(ContrasenaActivity.this, "Contraeña editada correctamente", Toast.LENGTH_SHORT ).show();
                     }
                     else
                     {

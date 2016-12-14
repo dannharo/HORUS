@@ -99,7 +99,7 @@ public class ReceiveSms extends BroadcastReceiver {
 
                              context.startActivity(intMap);
                          } catch (Exception e) {
-                             Toast.makeText(context, "OCurrió un error", Toast.LENGTH_LONG).show();
+                             Toast.makeText(context, "Ocurrió un error", Toast.LENGTH_LONG).show();
                          }
 
                      }

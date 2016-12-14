@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
     <item
-        android:id="@+id/ajustes"
-        android:title="@string/item6"
-        app:showAsAction="never">
+        android:id="@+id/delete"
+        android:title="@string/item7"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_action_discard">
     </item>
 
 </menu>

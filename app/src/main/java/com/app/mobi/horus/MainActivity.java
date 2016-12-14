@@ -48,11 +48,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "Permission is not granted, requesting", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "Permission is not granted, requesting", Toast.LENGTH_LONG).show();
             //Log.d("PLAYGROUND", "Permission is not granted, requesting");
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 123);
         } else {
-            Toast.makeText(this, "Permission is not granted", Toast.LENGTH_LONG).show();
+           // Toast.makeText(this, "Permission is not granted", Toast.LENGTH_LONG).show();
         }
         dbmanager = new DBManager(this);
         try {
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 TextView idTView = (TextView) view.findViewById(R.id.lvid);
                 String ids = idTView.getText().toString();
                 //Muestra mensaje con la posicion del elemento seleccionado
-                Toast.makeText(getBaseContext(), ids + " fue seleccionado", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getBaseContext(), ids + " fue seleccionado", Toast.LENGTH_LONG).show();
                 //Obtiene el nombre del elemento seleccionado
                 //String data = (String) listview.getAdapter().getItem(position);
                 //Se define el intent, indica a la clase a la que se pasara la informacion

@@ -40,7 +40,7 @@ public class Mensaje extends AppCompatActivity {
             //Log.d("PLAYGROUND", "Permission is not granted, requesting");
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 123);
         } else {
-            Toast.makeText(c, "Permission is  granted", Toast.LENGTH_LONG).show();
+            //Toast.makeText(c, "Permission is  granted", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -48,9 +48,9 @@ public class Mensaje extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == 123) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(getApplicationContext(), "Permission has been granted", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "Permission has been granted", Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(getApplicationContext(), "Permission has been denied or request cancelled", Toast.LENGTH_LONG).show();
+               // Toast.makeText(getApplicationContext(), "Permission has been denied or request cancelled", Toast.LENGTH_LONG).show();
             }
         }
 

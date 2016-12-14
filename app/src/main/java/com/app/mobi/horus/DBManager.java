@@ -84,6 +84,14 @@ public class DBManager {
         }
         return cursor;
     }
+    public Cursor fetchAdministrador(int id){
+        String[] columns = new String[]{HorusDB.T_A_ID,HorusDB.T_A_ID_DISPOSITIVO,HorusDB.T_A_NOMBRE,HorusDB.T_A_NUMERO};
+        Cursor cursor = database.query(HorusDB.TABLA_ADMON,columns,HorusDB.T_A_ID+" = "+id,null,null,null,null);
+        if (cursor != null){
+            cursor.moveToFirst();
+        }
+        return cursor;
+    }
     public int updateDispositivo(int id, String nombre, String  numero, String  imei,String password){
         ContentValues contentValue = new ContentValues();
         contentValue.put(HorusDB.T_D_ID,id);
@@ -94,10 +102,8 @@ public class DBManager {
         int i = database.update(HorusDB.TABLA_DISPOSITIVOS, contentValue, HorusDB.T_D_ID + " = " + id, null);
         return i;
     }
-    public int updateUsuarios(int id,String usuario, String password, String nombre){
+    public int updateUsuarios(int id, String password){
         ContentValues contentValue = new ContentValues();
-        contentValue.put(HorusDB.T_U_NOMBRE,nombre);
-        contentValue.put(HorusDB.T_U_USUARIO,usuario);
         contentValue.put(HorusDB.T_U_PASSWORD,password);
         int i = database.update(HorusDB.TABLA_USUARIOS,contentValue,HorusDB.T_U_ID +" = "+id,null);
         return i;
@@ -160,8 +166,8 @@ public class DBManager {
             return "NOT EXIST";
         }
         cursor.moveToFirst();
-        String contrasena= cursor.getString(cursor.getColumnIndex(HorusDB.T_U_PASSWORD));
+        String id= cursor.getString(cursor.getColumnIndex(HorusDB.T_U_ID));
         cursor.close();
-        return password;
+        return id;
     }
 }

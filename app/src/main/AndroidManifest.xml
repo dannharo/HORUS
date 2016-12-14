@@ -24,9 +24,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
-        <activity android:name=".DispositivoActivity" />
+        <activity android:name=".DispositivoActivity" android:label="Nuevo dispositivo"/>
         <activity android:name=".ContrasenaActivity" android:label="Cambiar contraseña"/>
-        <activity android:name=".AdministradorActivity" />
+        <activity android:name=".AdministradorActivity" android:label="Nuevo administrador" />
         <activity
             android:name=".PopAlarma"
             android:theme="@style/AppTheme.CustomTheme" />

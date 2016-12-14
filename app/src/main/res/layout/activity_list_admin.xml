@@ -32,20 +32,11 @@
         android:layout_alignParentStart="true"
         android:layout_above="@+id/imageButtonAdmin" />
 
-    <TextView
-        android:text="@string/version_tag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageButtonAdmin"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="10dp"
-        android:id="@+id/textView4" />
-    <TextView
+        <TextView
         android:id="@+id/empty1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="empty" />
+        android:text="Sin registros" />
 
 </RelativeLayout>

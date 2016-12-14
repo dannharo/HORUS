@@ -10,4 +10,50 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.app.mobi.horus.AdminCrudActivity">
 
-</RelativeLayout>
+    <TextView
+        android:text="Nombre:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/textNombreDet" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/textNombreDet"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/editNombreAdminDet"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:editable="false"
+        android:enabled="false"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textTelAdminDet"
+        android:text="Número de teléfono"
+        android:layout_below="@+id/editNombreAdminDet"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="34dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTelAdminDet"
+        android:inputType="phone"
+        android:layout_below="@+id/editNombreAdminDet"
+        android:layout_marginTop="82dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:editable="false"
+        android:enabled="false"/>
+
+    </RelativeLayout>

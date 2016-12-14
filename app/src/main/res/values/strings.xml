@@ -6,7 +6,8 @@
     <string name="item4">Alarmas</string>
     <string name="item5">Reiniciar</string>
     <string name="item6">Configuración</string>
-    <string name="version_tag">version 0.0.6</string>
+    <string name="item7">Eliminar</string>
+    <string name="version_tag">version 0.0.7</string>
     <string name="btn_list">Configurar</string>
     <string name="title_activity_map">Mapa ubicación</string>
     <string name="title_activity_admin">Administradores</string>

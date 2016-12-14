@@ -65,8 +65,6 @@ public class ListAdminActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView idTView = (TextView) view.findViewById(R.id.lvidAdmon);
                 String ids = idTView.getText().toString();
-                //Muestra mensaje con la posicion del elemento seleccionado
-                Toast.makeText(getBaseContext(), ids + " fue seleccionado", Toast.LENGTH_LONG).show();
                 //Obtiene el nombre del elemento seleccionado
                 //Se define el intent, indica a la clase a la que se pasara la informacion
                 Intent intent = new Intent(ListAdminActivity.this, AdminCrudActivity.class);

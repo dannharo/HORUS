@@ -43,7 +43,6 @@ public class PopAlarma extends Activity{
         }
         toogleSensor = (ToggleButton)findViewById(R.id.toggleAlarmMov);
         toogleBateria = (ToggleButton)findViewById(R.id.toggleAlarmBat);
-        Toast.makeText(this, "sensor: " +alarmaSensor, Toast.LENGTH_LONG).show();
         //Establece el estado del toogleButton en On u Off de alarma de movimiento
         if (alarmaSensor == 1)
         {
@@ -79,8 +78,7 @@ public class PopAlarma extends Activity{
             alarmaSensor = 1;
             //Envia el mensaje para activar la alerta, shock+contraseña
             mensaje = "shock"+contrasena;
-            //sms.enviarMensaje(telefono, mensaje);
-            Toast.makeText(this, "Activado", Toast.LENGTH_LONG).show();
+            sms.enviarMensaje(telefono, mensaje);
         }else
         {
             //Almacena en la base de datos el nuevo estado en 0, indica desactivado
@@ -88,8 +86,7 @@ public class PopAlarma extends Activity{
             alarmaSensor = 0;
             //Envia el mensaje para activar la alerta, noshock+contraseña
             mensaje = "noshock"+contrasena;
-            //sms.enviarMensaje(telefono, mensaje);
-            Toast.makeText(this, "Desactivado", Toast.LENGTH_LONG).show();
+            sms.enviarMensaje(telefono, mensaje);
         }
     }
     public void toggleClickBateria(View view)
@@ -100,19 +97,17 @@ public class PopAlarma extends Activity{
             //Almacena en la base de datos el nuevo estado en 1, indica activado
             dbmanager.updateAlarmBat(idDisp, 1);
             alarmaBateria = 1;
-            //Envia el mensaje para activar la alerta, shock+contraseña
-            mensaje = "shock"+contrasena;
-            //sms.enviarMensaje(telefono, mensaje);
-            Toast.makeText(this, "Activado", Toast.LENGTH_LONG).show();
+            //Envia el mensaje para activar la alerta
+            mensaje = "lowbattery" + contrasena + " on";
+            sms.enviarMensaje(telefono, mensaje);
         }else
         {
             //Almacena en la base de datos el nuevo estado en 0, indica desactivado
             dbmanager.updateAlarmBat(idDisp, 0);
             alarmaBateria = 0;
-            //Envia el mensaje para activar la alerta, noshock+contraseña
-            mensaje = "noshock"+contrasena;
-            //sms.enviarMensaje(telefono, mensaje);
-            Toast.makeText(this, "Desactivado", Toast.LENGTH_LONG).show();
+            //Envia el mensaje para activar la alerta
+            mensaje = "lowbattery" + contrasena + " off";
+            sms.enviarMensaje(telefono, mensaje);
         }
     }
 

@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -83,7 +85,7 @@ public class DeviceCrudActivity extends AppCompatActivity {
                         dbManager.deleteDispositivo(_id);
                         Intent intent = new Intent(DeviceCrudActivity.this, MainActivity.class);
                         startActivity(intent);
-                        Toast.makeText(DeviceCrudActivity.this, "Se borró el registro", Toast.LENGTH_SHORT ).show();
+                        Toast.makeText(DeviceCrudActivity.this, "Dispositivo eliminado correctamente", Toast.LENGTH_SHORT ).show();
                     }
                 });
                 builder.setNegativeButton(android.R.string.cancel, null);
@@ -103,7 +105,7 @@ public class DeviceCrudActivity extends AppCompatActivity {
                         dbManager.updateDispositivo(_id, textNombre.getText().toString(), textNumero.getText().toString(), textIMEI.getText().toString(),textPassword.getText().toString());
                         Intent intent = new Intent(DeviceCrudActivity.this, MainActivity.class);
                         startActivity(intent);
-                        Toast.makeText(DeviceCrudActivity.this, "Se editó el registro", Toast.LENGTH_SHORT ).show();
+                        Toast.makeText(DeviceCrudActivity.this, "Dispositivo editado correctamente", Toast.LENGTH_SHORT ).show();
                     }
                 });
                 builder.setNegativeButton(android.R.string.cancel, null);
@@ -112,5 +114,25 @@ public class DeviceCrudActivity extends AppCompatActivity {
             }
         });
 
+    }
+    //Menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        //Inflate the menu; this adds items to the action bar if it is present
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return  true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.ajustes) {
+            Intent intent1 = new Intent(this, ConfiguracionActivity.class);
+            intent1.putExtra("activity", "mapa");
+            this.startActivity(intent1);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

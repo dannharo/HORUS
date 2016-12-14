@@ -66,26 +66,7 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
         lon = objIntent.getStringExtra("longitud");
     }
 
-    //Menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        //Inflate the menu; this adds items to the action bar if it is present
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return  true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.ajustes) {
-            Intent intent1 = new Intent(this, ConfiguracionActivity.class);
-            intent1.putExtra("activity", "mapa");
-            this.startActivity(intent1);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+    
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
