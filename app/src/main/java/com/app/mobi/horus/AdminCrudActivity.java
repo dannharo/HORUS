@@ -83,6 +83,7 @@ public class AdminCrudActivity extends AppCompatActivity {
                     startActivity(intent);
                     //Se envia mensaje para eliminar el admin del dispositivo
                     mensaje = "noadmin"+contrasena;
+                    sms.enviarMensaje(telefono, mensaje);
                     Toast.makeText(AdminCrudActivity.this, "Administrador eliminado correctamente", Toast.LENGTH_SHORT).show();
                 }
             });
