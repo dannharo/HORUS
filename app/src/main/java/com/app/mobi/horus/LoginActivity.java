@@ -84,6 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                         //Se abre la nueva ventana, con el listado de dispositivos
                         Intent myIntent = new Intent(v.getContext(), MainActivity.class);
                         startActivityForResult(myIntent, 0);
+                        finish();
                     }
                     else
                     {

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private SimpleCursorAdapter adapter;
     final String[] from = new String[]{HorusDB.T_D_NOMBRE,HorusDB.T_D_ID};
     final int[] to = new int[]{R.id.lvnombre,R.id.lvid};
+
     //public static ArrayList<String> telefonosGps = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,8 +146,9 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    //Evita que se valla hacia atras y se vea el login nuevamente
+    //Minimiza la aplicación
     @Override
     public void onBackPressed() {
+        moveTaskToBack(true);
     }
 }

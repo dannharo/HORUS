@@ -44,6 +44,8 @@ public class NotifyActivity extends Activity {
                 intMap.putExtra("latitud", lat);
                 intMap.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intMap);
+                //para la reproducción del sonido
+                mp.stop();
                 //Cierra todas las activity
                 finish();
             }
@@ -51,11 +53,13 @@ public class NotifyActivity extends Activity {
         builder.setNegativeButton("Cerrar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                mp.stop();
                finish();
             }
         });
         //Se reproduce el sonido de la alerta
         mp = MediaPlayer.create(NotifyActivity.this, R.raw.alerta1);
+        mp.setLooping(true);
         mp.start();
         //se crea y muestra el cuadro de dialogo
         Dialog dialog = builder.create();
