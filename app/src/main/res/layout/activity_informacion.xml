@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Version 0.0.8"
+        android:text="Version 0.0.9"
         android:id="@+id/textVersion"
         android:layout_below="@+id/textNombreApp"
         android:layout_centerHorizontal="true" />

@@ -76,9 +76,9 @@ public class DBManager {
         }
         return cursor;
     }
-    public Cursor fetchAdministradores(){
+    public Cursor fetchAdministradores(int _id){
         String[] columns = new String[]{HorusDB.T_A_ID,HorusDB.T_A_ID_DISPOSITIVO,HorusDB.T_A_NOMBRE,HorusDB.T_A_NUMERO};
-        Cursor cursor = database.query(HorusDB.TABLA_ADMON,columns,null,null,null,null,null);
+        Cursor cursor = database.query(HorusDB.TABLA_ADMON,columns,HorusDB.T_A_ID_DISPOSITIVO+" = "+_id,null,null,null,null);
         if (cursor != null){
             cursor.moveToFirst();
         }

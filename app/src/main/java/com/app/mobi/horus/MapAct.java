@@ -34,6 +34,7 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
     String mensaje="";
     String lat="";
     String lon="";
+    String activity ="";
     //Almacena la latitud y longitud que actualmente estan almacenados en la base de datos
     Double latActual = 0.0;
     Double lonActual=0.0;
@@ -64,6 +65,7 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
         Intent objIntent = this.getIntent();
         lat = objIntent.getStringExtra("latitud");
         lon = objIntent.getStringExtra("longitud");
+        activity = objIntent.getStringExtra("activity");
     }
 
     
@@ -118,5 +120,21 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
             sms.enviarMensaje(noTelefono, mensaje);
         }
 
+    }
+    //Minimiza la aplicación
+    @Override
+    public void onBackPressed() {
+        //Valida si el mapa se mostro por la alerta, regresa al mapa
+        if (activity != null && !activity.equals("")) {
+            if (activity.equals("alarma")) {
+                Intent intentHome = new Intent(MapAct.this, MainActivity.class);
+                startActivity(intentHome);
+                finish();
+            }
+        }
+        else
+       {
+            finish();
+       }
     }
 }

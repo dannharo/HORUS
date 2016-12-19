@@ -23,7 +23,7 @@ public class AdministradorActivity extends AppCompatActivity {
     EditText nombre, noTelefono;
     Button btnGuardarAdmin;
     String nombreText, telAdminText;
-
+    final int id_disp = DeviceCrudActivity._id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +61,7 @@ public class AdministradorActivity extends AppCompatActivity {
                 {
                     final String nombre = nombreText;
                     final String telefono = telAdminText;
-                    final int id_disp = 1;
+
                     dbmanager.insertAdministrador(id_disp,telefono,nombre);
                     Intent main = new Intent(AdministradorActivity.this,ListAdminActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(main);

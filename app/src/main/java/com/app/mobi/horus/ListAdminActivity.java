@@ -22,6 +22,7 @@ public class ListAdminActivity extends AppCompatActivity {
     ImageButton floatButtonAdmin;
     ListView listViewAdmin;
     private DBManager dbmanager;
+    private int idDisp  = DeviceCrudActivity._id;
     //ArrayAdapter<String> adapter;
     private SimpleCursorAdapter adapter;
     final String[] from = new String[]{HorusDB.T_A_NOMBRE,HorusDB.T_A_ID};
@@ -40,7 +41,7 @@ public class ListAdminActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Cursor cursor = dbmanager.fetchAdministradores();
+        Cursor cursor = dbmanager.fetchAdministradores(idDisp);
         listViewAdmin = (ListView) findViewById(R.id.listAdmin);
         listViewAdmin.setEmptyView(findViewById(R.id.empty1));
         adapter = new SimpleCursorAdapter(this,R.layout.list_administradores,cursor,from,to,0);

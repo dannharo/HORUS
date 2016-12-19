@@ -42,6 +42,7 @@ public class NotifyActivity extends Activity {
                 Intent intMap = new Intent(NotifyActivity.this, MapAct.class);
                 intMap.putExtra("longitud", lon);
                 intMap.putExtra("latitud", lat);
+                intMap.putExtra("activity", "alarma");
                 intMap.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intMap);
                 //para la reproducción del sonido
@@ -54,7 +55,11 @@ public class NotifyActivity extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mp.stop();
+                Intent intentHome = new Intent(NotifyActivity.this, MainActivity.class);
+                startActivityForResult(intentHome, 0);
                finish();
+                moveTaskToBack(true);
+
             }
         });
         //Se reproduce el sonido de la alerta
