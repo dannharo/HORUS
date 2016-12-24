@@ -18,6 +18,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -68,7 +69,7 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
         activity = objIntent.getStringExtra("activity");
     }
 
-    
+
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -92,7 +93,7 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
             dbmanager.updateDispositivo(idDisp, Double.parseDouble(lat), Double.parseDouble(lon));
             //Muestra en el mapa la ubicación obtenida del sms gps
             LatLng actual = new LatLng(Double.parseDouble(lat), Double.parseDouble(lon));
-            mMap.addMarker(new MarkerOptions().position(actual).title("Actual"));
+            mMap.addMarker(new MarkerOptions().position(actual).title("Actual").icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker)));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(actual, 15));
         }
         else
@@ -110,7 +111,7 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
             cursor.close();
             //Se agrega en el mapa la posicion obtenida
             LatLng actualBD = new LatLng(Double.parseDouble(latitudBD), Double.parseDouble(longitudBD));
-            mMap.addMarker(new MarkerOptions().position(actualBD).title(nombreDisp));
+            mMap.addMarker(new MarkerOptions().position(actualBD).title(nombreDisp).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker)));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(actualBD, 15));
             //Envia mensaje para obtener la ubicación actual
             //El mensaje se conforma de la sig forma: fix030s(obtener en 30 segundos la posicion)+001n
@@ -121,6 +122,8 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
         }
 
     }
+
+
     //Minimiza la aplicación
     @Override
     public void onBackPressed() {
