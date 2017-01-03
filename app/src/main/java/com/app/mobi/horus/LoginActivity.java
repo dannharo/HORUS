@@ -38,6 +38,8 @@ public class LoginActivity extends AppCompatActivity {
         startService(new Intent(this, ServiceCommunicator.class));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        //Esconde el action bar que muestra el titulo
+        getSupportActionBar().hide();
         dbmanager = new DBManager(this);
         try {
             dbmanager.open();

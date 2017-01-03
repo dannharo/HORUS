@@ -28,7 +28,7 @@ import java.sql.SQLException;
 public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-
+    private Marker marcador;
     Mensaje sms = new Mensaje(this);
     NotifyActivity alarma = new NotifyActivity();
     //Declaración de variables
@@ -36,9 +36,9 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
     String lat="";
     String lon="";
     String activity ="";
-    //Almacena la latitud y longitud que actualmente estan almacenados en la base de datos
-    Double latActual = 0.0;
-    Double lonActual=0.0;
+    //Se almacena la ubicación actual
+    String latActual = "";
+    String lonActual="";
     private DBManager dbmanager;
     //Almacena datos del dispositivo
     int idDisp = DeviceCrudActivity._id;
@@ -89,6 +89,8 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
 
         if ((lat != null) && (lon != null))
         {
+            latActual = lat;
+            lonActual = lon;
             //Se guarda en la tabla la ubicacion actual
             dbmanager.updateDispositivo(idDisp, Double.parseDouble(lat), Double.parseDouble(lon));
             //Muestra en el mapa la ubicación obtenida del sms gps
@@ -105,6 +107,8 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
                 nombreDisp = cursor.getString(cursor.getColumnIndex(HorusDB.T_D_NOMBRE));
                 longitudBD = cursor.getString(cursor.getColumnIndex(HorusDB.T_D_LONGITUD));
                 latitudBD = cursor.getString(cursor.getColumnIndex(HorusDB.T_D_LATITUD));
+                latActual = latitudBD;
+                lonActual = longitudBD;
                 cursor.moveToNext();
                 }
             }
@@ -120,7 +124,24 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
             //Se manda mensaje para obtener la ubicación del gps
             sms.enviarMensaje(noTelefono, mensaje);
         }
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener()
+        {
 
+            @Override
+            public boolean onMarkerClick(Marker arg0) {
+                //Se muestra en una nueva ventana la información de la ubicación
+                Intent intentInfo = new Intent(MapAct.this, UbicacionActivity.class);
+                //Se manda las coordenadas de la ubicación
+                intentInfo.putExtra("latitud",latActual);
+                intentInfo.putExtra("longitud",lonActual);
+                startActivity(intentInfo);
+                //Toast.makeText(MapAct.this, arg0.getTitle(), Toast.LENGTH_SHORT).show();
+               /* if(arg0 != null && arg0.getTitle().equals(marcador.getTitle().toString())); // if marker  source is clicked
+                Toast.makeText(MapAct.this, arg0.getTitle(), Toast.LENGTH_SHORT).show();// display toast*/
+                return true;
+            }
+
+        });
     }
 
 

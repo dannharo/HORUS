@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "No contiene dirección", Toast.LENGTH_LONG).show();
-        }*/
+        }*
        /* String user="", pass="", name="";
         Cursor usuario = dbmanager.fetchUsuarios();
         if(usuario.moveToFirst()){
