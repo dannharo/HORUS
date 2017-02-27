@@ -55,12 +55,11 @@
 
         <activity
             android:name=".MapAct"
-            android:label="@string/title_activity_map"></activity>
+            android:label="@string/title_activity_map" />
         <activity
             android:name=".ListAdminActivity"
             android:label="@string/title_activity_admin" />
-        <activity
-            android:name=".LoginActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -88,7 +87,8 @@
             android:label="@string/title_activity_info" />
         <activity
             android:name=".UbicacionActivity"
-            android:label="@string/title_activity_ubicacion"></activity>
+            android:label="@string/title_activity_ubicacion" />
+        <activity android:name=".MenuDispositivoActivity"></activity>
     </application>
 
 </manifest>
