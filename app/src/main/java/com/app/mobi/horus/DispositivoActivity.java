@@ -80,6 +80,8 @@ public class DispositivoActivity extends AppCompatActivity {
                 //Enva mensaje para iniciar el dispositivo
                 mensaje = "begin" + passDispText + " ";
                 sms.enviarMensaje(notTelDispText, mensaje);
+                mensaje = "sleep" + passDispText + " shock";
+                sms.enviarMensaje(notTelDispText, mensaje);
             }
         });
 

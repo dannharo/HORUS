@@ -19,7 +19,7 @@ public class AdminCrudActivity extends AppCompatActivity {
     private int idAdmin = 0;
     private DBManager dbManager;
     private String mensaje="";
-    private String getTelefono = DeviceCrudActivity.telGps;
+    private String gpsTelefono = DeviceCrudActivity.telGps;
     private String  contrasena = DeviceCrudActivity.contrasena;
     String nombre, telefono;
     EditText editNombre, editTelefono;
@@ -83,7 +83,7 @@ public class AdminCrudActivity extends AppCompatActivity {
                     startActivity(intent);
                     //Se envia mensaje para eliminar el admin del dispositivo
                     mensaje = "noadmin"+contrasena;
-                    sms.enviarMensaje(telefono, mensaje);
+                    sms.enviarMensaje(gpsTelefono, mensaje);
                     Toast.makeText(AdminCrudActivity.this, "Administrador eliminado correctamente", Toast.LENGTH_SHORT).show();
                 }
             });
