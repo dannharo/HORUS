@@ -19,8 +19,8 @@ public class AdminCrudActivity extends AppCompatActivity {
     private int idAdmin = 0;
     private DBManager dbManager;
     private String mensaje="";
-    private String gpsTelefono = DeviceCrudActivity.telGps;
-    private String  contrasena = DeviceCrudActivity.contrasena;
+    private String gpsTelefono = MenuDispositivoActivity.telGps;
+    private String  contrasena = MenuDispositivoActivity.contrasena;
     String nombre, telefono;
     EditText editNombre, editTelefono;
     Mensaje sms = new Mensaje(this);

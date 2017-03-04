@@ -17,7 +17,10 @@
     <string name="title_activity_dispositivo">Detalles dispositivo</string>
     <string name="title_activity_home">Horus</string>
     <string name="title_activity_info">Información</string>
+    <string name="title_activity_status">Estado del dispositivo</string>
+    <string name="title_activity_saldo">Control de saldo</string>
     <string name="title_activity_ubicacion">Detalles de ubicación</string>
+    <string name="title_activity_desactivacion">Desactivación por llave</string>
     <string name="nombre_tag">Nombre:</string>
     <string name="numero_tag">Número:</string>
     <string name="IMEI_tag">IMEI:</string>

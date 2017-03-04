@@ -88,7 +88,16 @@
         <activity
             android:name=".UbicacionActivity"
             android:label="@string/title_activity_ubicacion" />
-        <activity android:name=".MenuDispositivoActivity"></activity>
+        <activity android:name=".MenuDispositivoActivity" />
+        <activity
+            android:name=".StatusDispositivoActivity"
+            android:label="@string/title_activity_status" />
+        <activity
+            android:name=".ControlSaldoActivity"
+            android:label="@string/title_activity_saldo"></activity>
+        <activity android:name=".DesactivacionLlaveActivity"
+            android:label="@string/title_activity_desactivacion">
+        </activity>
     </application>
 
 </manifest>

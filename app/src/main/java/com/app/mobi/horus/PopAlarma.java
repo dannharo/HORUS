@@ -15,11 +15,11 @@ import java.sql.SQLException;
  */
 public class PopAlarma extends Activity{
     private DBManager dbmanager;
-    private int idDisp = DeviceCrudActivity._id;
-    private String contrasena  =DeviceCrudActivity.contrasena;
-    private String telefono = DeviceCrudActivity.telGps;
-    private static int alarmaSensor = DeviceCrudActivity.alarmSensor;
-    private static int alarmaBateria = DeviceCrudActivity.alarmBateria;
+    private int idDisp = MenuDispositivoActivity._id;
+    private String contrasena  =MenuDispositivoActivity.contrasena;
+    private String telefono = MenuDispositivoActivity.telGps;
+    private static int alarmaSensor = MenuDispositivoActivity.alarmSensor;
+    private static int alarmaBateria = MenuDispositivoActivity.alarmBateria;
     Mensaje sms = new Mensaje(this);
     String mensaje = "";
     ToggleButton toogleSensor;

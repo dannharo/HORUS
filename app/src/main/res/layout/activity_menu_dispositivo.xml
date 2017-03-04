@@ -1,10 +1,49 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_alignParentRight="true"
     android:layout_alignParentEnd="true"
     android:stretchColumns="0,1"
-    android:padding="15dp">
+    android:padding="15dp"
+    android:layout_marginTop="30dp">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:paddingBottom="20dp"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:paddingTop="20dp"
+            android:text="Armar"
+            android:id="@+id/armarButton"
+            android:layout_column="0"
+            android:background="@drawable/boton_redondo"
+            android:drawableTop="@mipmap/ic_lock_white_48dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginLeft ="18dp"
+            android:textColor="#ffffff"
+            android:textStyle="normal"
+            android:textSize="20px"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:paddingTop="20dp"
+            android:text="Desarmar"
+            android:id="@+id/desarmarButton"
+            android:layout_column="0"
+            android:background="@drawable/boton_redondo"
+            android:drawableTop="@mipmap/ic_lock_open_white_48dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginLeft ="12dp"
+            android:textColor="#ffffff"
+            android:textStyle="normal"
+            android:textSize="20px"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+    </TableRow>
 
     <TableRow
         android:layout_width="match_parent"
@@ -14,93 +53,72 @@
         <Button
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:text="Armar"
-            android:id="@+id/armartButton"
-            android:layout_column="0"
-            android:background="#3399ff"
-            android:drawableTop="@android:drawable/ic_lock_idle_lock"
-            android:layout_marginRight="8dp"
-            android:textColor="#ffffff"
-            android:textStyle="normal"
-            android:textSize="40px" />
-
-        <Button
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:text="Desarmar"
-            android:id="@+id/desarmarButton"
-            android:layout_column="0"
-            android:background="#3399ff"
-            android:drawableTop="@android:drawable/ic_lock_idle_lock"
-            android:layout_marginRight="8dp"
-            android:textColor="#ffffff"
-            android:textStyle="normal"
-            android:textSize="40px" />
-
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:paddingBottom="12dp"
-        android:layout_height="match_parent" >
-
-        <Button
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:text="Mostrar ubicación"
+            android:paddingTop="20dp"
+            android:text="Ubicación"
             android:id="@+id/ubicacionButton"
             android:layout_column="0"
-            android:background="#3399ff"
-            android:drawableTop="@android:drawable/ic_lock_idle_lock"
-            android:layout_marginRight="8dp"
+            android:background="@drawable/boton_redondo"
+            android:drawableTop="@mipmap/ic_place_white_48dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginLeft ="18dp"
             android:textColor="#ffffff"
             android:textStyle="normal"
-            android:textSize="40px" />
+            android:textSize="20px"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
 
         <Button
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:paddingTop="20dp"
             android:text="Configuración"
-            android:id="@+id/configButton"
+            android:id="@+id/configuracionButton"
             android:layout_column="0"
-            android:background="#3399ff"
-            android:drawableTop="@android:drawable/ic_lock_idle_lock"
-            android:layout_marginRight="8dp"
+            android:background="@drawable/boton_redondo"
+            android:drawableTop="@mipmap/ic_settings_white_48dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginLeft ="12dp"
             android:textColor="#ffffff"
             android:textStyle="normal"
-            android:textSize="40px" />
+            android:textSize="20px"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
     </TableRow>
 
     <TableRow
         android:layout_width="match_parent"
         android:paddingBottom="12dp"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <Button
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:text="Estado del dispositivo"
-            android:id="@+id/estadoButton"
+            android:paddingTop="20dp"
+            android:text="Estado"
+            android:id="@+id/statusButton"
             android:layout_column="0"
-            android:background="#3399ff"
-            android:drawableTop="@android:drawable/ic_lock_idle_lock"
-            android:layout_marginRight="8dp"
+            android:background="@drawable/boton_redondo"
+            android:drawableTop="@mipmap/ic_perm_device_information_white_48dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginLeft ="18dp"
             android:textColor="#ffffff"
             android:textStyle="normal"
-            android:textSize="40px" />
+            android:textSize="20px"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
 
         <Button
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:paddingTop="20dp"
             android:text="Control de saldo"
             android:id="@+id/saldoButton"
             android:layout_column="0"
-            android:background="#3399ff"
-            android:drawableTop="@android:drawable/ic_lock_idle_lock"
-            android:layout_marginRight="8dp"
+            android:background="@drawable/boton_redondo"
+            android:drawableTop="@mipmap/ic_monetization_on_white_48dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginLeft ="12dp"
             android:textColor="#ffffff"
             android:textStyle="normal"
-            android:textSize="40px" />
+            android:textSize="20px"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
     </TableRow>
 
 </TableLayout>

@@ -15,15 +15,15 @@ public class AdministradorActivity extends AppCompatActivity {
 
     Mensaje sms = new Mensaje(this);
     //Declaración de variables
-    String contraseña =DeviceCrudActivity.contrasena;
+    String contraseña =MenuDispositivoActivity.contrasena;
     String mensaje;
-    String noTelGps = DeviceCrudActivity.telGps;
+    String noTelGps = MenuDispositivoActivity.telGps;
     private DBManager dbmanager;
 
     EditText nombre, noTelefono;
     Button btnGuardarAdmin;
     String nombreText, telAdminText;
-    final int id_disp = DeviceCrudActivity._id;
+    final int id_disp = MenuDispositivoActivity._id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

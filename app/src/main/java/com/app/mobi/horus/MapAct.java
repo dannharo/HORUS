@@ -41,9 +41,9 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
     String lonActual="";
     private DBManager dbmanager;
     //Almacena datos del dispositivo
-    int idDisp = DeviceCrudActivity._id;
-    String contraseña =DeviceCrudActivity.contrasena;
-    String noTelefono = DeviceCrudActivity.telGps;
+    int idDisp = MenuDispositivoActivity._id;
+    String contraseña =MenuDispositivoActivity.contrasena;
+    String noTelefono = MenuDispositivoActivity.telGps;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Se crea instancia con la clase que contiene la base de datos

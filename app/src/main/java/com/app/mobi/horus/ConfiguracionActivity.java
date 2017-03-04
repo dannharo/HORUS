@@ -19,8 +19,8 @@ public class ConfiguracionActivity extends AppCompatActivity {
     private ListView lista;
     private String mensaje;
     Mensaje sms = new Mensaje(this);
-    private String telefono = DeviceCrudActivity.telGps;
-    private String contrasena = DeviceCrudActivity.contrasena;
+    private String telefono = MenuDispositivoActivity.telGps;
+    private String contrasena = MenuDispositivoActivity.contrasena;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,19 +35,17 @@ public class ConfiguracionActivity extends AppCompatActivity {
             opcionesConfiguracion[0]="Cambiar contraseña";
             opcionesConfiguracion[1]="Administradores";
             opcionesConfiguracion[2]="Alarmas";
-            opcionesConfiguracion[3]="Armar";
-            opcionesConfiguracion[4]="Desarmar";
-            opcionesConfiguracion[5]="Reiniciar";
-            opcionesConfiguracion[6]="Información";
+            opcionesConfiguracion[3]="Reiniciar";
+            opcionesConfiguracion[4]="Desactivación por llave";
+            opcionesConfiguracion[5]="Información";
             //Iconos del menu
             iconOpcion = new Integer[7];
             iconOpcion[0] =  R.drawable.ic_action_secure;
             iconOpcion[1] =  R.drawable.ic_action_person;
             iconOpcion[2] =  R.drawable.ic_action_alarms;
-            iconOpcion[3] =  R.drawable.ic_action_merge;
-            iconOpcion[4] =  R.drawable.ic_action_import_export;
-            iconOpcion[5] =  R.drawable.ic_action_refresh;
-            iconOpcion[6] =  R.drawable.ic_action_about;
+            iconOpcion[3] =  R.drawable.ic_action_refresh;
+            iconOpcion[4] =  R.drawable.ic_action_refresh;
+            iconOpcion[5] =  R.drawable.ic_action_about;
         }
         else
         {
@@ -85,16 +83,6 @@ public class ConfiguracionActivity extends AppCompatActivity {
                         Intent intentAlarma = new Intent(ConfiguracionActivity.this, PopAlarma.class);
                         startActivity(intentAlarma);
                         break;
-                    case "Armar":
-                        //Envia mensaje para armar dispositivo;
-                        mensaje = "arm"+contrasena;
-                        sms.enviarMensaje(telefono, mensaje);
-                        break;
-                    case "Desarmar":
-                        //Envia mensaje para desarmar dispositivo
-                        mensaje = "disarm"+contrasena;
-                        sms.enviarMensaje(telefono, mensaje);
-                        break;
                     case "Reiniciar":
                         //Envia mensaje para reiniciar el dispositivo
                         mensaje = "reset"+contrasena;
@@ -103,6 +91,10 @@ public class ConfiguracionActivity extends AppCompatActivity {
                     case "Información":
                         Intent intentInfo = new Intent(ConfiguracionActivity.this, InformacionActivity.class);
                         startActivity(intentInfo);
+                        break;
+                    case "Desactivación por llave":
+                        Intent intent = new Intent(ConfiguracionActivity.this, DesactivacionLlaveActivity.class);
+                        startActivity(intent);
                         break;
                 }
             }

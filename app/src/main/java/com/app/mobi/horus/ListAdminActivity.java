@@ -22,7 +22,7 @@ public class ListAdminActivity extends AppCompatActivity {
     ImageButton floatButtonAdmin;
     ListView listViewAdmin;
     private DBManager dbmanager;
-    private int idDisp  = DeviceCrudActivity._id;
+    private int idDisp  = MenuDispositivoActivity._id;
     //ArrayAdapter<String> adapter;
     private SimpleCursorAdapter adapter;
     final String[] from = new String[]{HorusDB.T_A_NOMBRE,HorusDB.T_A_ID};
