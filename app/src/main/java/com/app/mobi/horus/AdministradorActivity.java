@@ -1,7 +1,10 @@
 package com.app.mobi.horus;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -101,6 +104,7 @@ public class AdministradorActivity extends AppCompatActivity {
                         //Muestra el listado de administradores
                         Intent main = new Intent(AdministradorActivity.this,ListAdminActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(main);
+                        finish();
                     }
 
 
@@ -110,5 +114,34 @@ public class AdministradorActivity extends AppCompatActivity {
                 sms.enviarMensaje(telGps, mensaje);
             }
         });
+
+    }
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(AdministradorActivity.this);
+        //Metodos del constructor
+        builder.setTitle("¿Esta seguro que desea salir sin guardar el administrador?");
+        builder.setMessage("Los cambios no se guardaran");
+        builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(lastActivity.equals("Dispositivo"))
+                {
+                    //Muestra el listado de dispositivos
+                    Intent intent = new Intent(AdministradorActivity.this, MainActivity.class);
+                    startActivityForResult(intent, 0);
+                    finish();
+                }else
+                {
+                    //Muestra el listado de administradores
+                    Intent main = new Intent(AdministradorActivity.this,ListAdminActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(main);
+                    finish();
+                }
+            }
+        });
+        builder.setNegativeButton("Cancelar", null);
+        Dialog dialog = builder.create();
+        dialog.show();
     }
 }

@@ -81,9 +81,10 @@ public class AdminCrudActivity extends AppCompatActivity {
                     dbManager.deleteAdministrador(idAdmin);
                     Intent intent = new Intent(AdminCrudActivity.this, ListAdminActivity.class);
                     startActivity(intent);
+                    finish();
                     //Se envia mensaje para eliminar el admin del dispositivo
                     mensaje = "noadmin"+contrasena;
-                    sms.enviarMensaje(gpsTelefono, mensaje);
+                   sms.enviarMensaje(gpsTelefono, mensaje);
                     Toast.makeText(AdminCrudActivity.this, "Administrador eliminado correctamente", Toast.LENGTH_SHORT).show();
                 }
             });

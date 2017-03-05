@@ -31,22 +31,24 @@ public class ConfiguracionActivity extends AppCompatActivity {
         if (activity.equals("mapa"))
         {
             //Array para almacenar las opciones del menu
-            opcionesConfiguracion=new String[6];
+            opcionesConfiguracion=new String[7];
             //Se agrega al array las opciones para el menu
-            opcionesConfiguracion[0]="Cambiar contraseña";
-            opcionesConfiguracion[1]="Administradores";
-            opcionesConfiguracion[2]="Alarmas";
-            opcionesConfiguracion[3]="Reiniciar";
-            opcionesConfiguracion[4]="Desactivación por llave";
-            opcionesConfiguracion[5]="Información";
+            opcionesConfiguracion[0]="Editar dispositivo";
+            opcionesConfiguracion[1]="Cambiar contraseña";
+            opcionesConfiguracion[2]="Administradores";
+            opcionesConfiguracion[3]="Alarmas";
+            opcionesConfiguracion[4]="Reiniciar";
+            opcionesConfiguracion[5]="Desactivación por llave";
+            opcionesConfiguracion[6]="Información";
             //Iconos del menu
-            iconOpcion = new Integer[6];
-            iconOpcion[0] =  R.drawable.ic_action_secure;
-            iconOpcion[1] =  R.drawable.ic_action_person;
-            iconOpcion[2] =  R.drawable.ic_action_alarms;
-            iconOpcion[3] =  R.drawable.ic_action_refresh;
+            iconOpcion = new Integer[7];
+            iconOpcion[0] =  R.drawable.ic_border_color;
+            iconOpcion[1] =  R.drawable.ic_action_secure;
+            iconOpcion[2] =  R.drawable.ic_action_person;
+            iconOpcion[3] =  R.drawable.ic_action_alarms;
             iconOpcion[4] =  R.drawable.ic_action_refresh;
-            iconOpcion[5] =  R.drawable.ic_action_about;
+            iconOpcion[5] =  R.drawable.ic_action_refresh;
+            iconOpcion[6] =  R.drawable.ic_action_about;
         }
         else
         {
@@ -72,15 +74,17 @@ public class ConfiguracionActivity extends AppCompatActivity {
                 //Dependiendo de la posicion muestra el layout correspondiente
                 switch (Slecteditem)
                 {
+                    case "Editar dispositivo":
+                        Intent intentEditar = new Intent(ConfiguracionActivity.this, DeviceCrudActivity.class);
+                        intentEditar.putExtra("id_device",String.valueOf(idDisp));
+                        startActivity(intentEditar);
+                        break;
                     case "Cambiar contraseña":
                         Intent intentContrasena = new Intent(ConfiguracionActivity.this, ContrasenaActivity.class);
                         startActivity(intentContrasena);
                     break;
                     case "Administradores":
                         Intent intentAdmin = new Intent(ConfiguracionActivity.this, ListAdminActivity.class);
-                        //Envia el id del dispositivo insertado
-                        intentAdmin.putExtra("idDisp",String.valueOf(idDisp));
-                        intentAdmin.putExtra("lastActivity","Dispositivo");
                         startActivity(intentAdmin);
                         break;
                     case "Alarmas":

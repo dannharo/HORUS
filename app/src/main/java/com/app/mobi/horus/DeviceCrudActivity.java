@@ -65,15 +65,16 @@ public class DeviceCrudActivity extends AppCompatActivity {
             }
         }
         cursor.close();
-        btnMapa =(Button) findViewById(R.id.btnOptMapa);
-        btnEditar = (Button) findViewById(R.id.btnOptEditar);
-        btnEliminar = (Button) findViewById(R.id.btnOptEliminar);
+       /* btnMapa =(Button) findViewById(R.id.btnOptMapa);
         btnMapa.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(DeviceCrudActivity.this, MapAct.class);
                 startActivity(intent);
             }
-        });
+        });*/
+        btnEditar = (Button) findViewById(R.id.btnOptEditar);
+        btnEliminar = (Button) findViewById(R.id.btnOptEliminar);
+
         btnEliminar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(DeviceCrudActivity.this);

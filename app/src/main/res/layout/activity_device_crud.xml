@@ -73,36 +73,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <Button
-        android:text="Eliminar"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnOptEliminar"
-        android:layout_alignBaseline="@+id/btnOptEditar"
-        android:layout_alignBottom="@+id/btnOptEditar"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:text="Editar"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnOptEditar"
-        android:elevation="0dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="54dp" />
-
-    <Button
-        android:text="@string/btn_ver_mapa_tag"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnOptMapa"
-        android:layout_above="@+id/btnOptEditar"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <TextView
         android:text="@string/pass_tag"
         android:layout_width="wrap_content"
@@ -124,4 +94,25 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
        />
+
+    <Button
+        android:text="Eliminar"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnOptEliminar"
+        android:layout_below="@+id/editPassDisp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="Editar"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnOptEditar"
+        android:elevation="0dp"
+        android:layout_below="@+id/editPassDisp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp" />
 </RelativeLayout>
