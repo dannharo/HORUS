@@ -11,6 +11,7 @@ public class HorusDB extends SQLiteOpenHelper {
     public static final String TABLA_DISPOSITIVOS  = "DISPOSITIVOS";
     public static final String TABLA_USUARIOS = "USUARIOS";
     public static final String TABLA_ADMON = "ADMINISTRADORES";
+    public static final String TABLA_ESTADO_DISPOSITIVOS = "ESTADO_DISPOSITIVOS";
 
     // tables columns
     //TABLA DE DISPOSITIVOS
@@ -23,6 +24,13 @@ public class HorusDB extends SQLiteOpenHelper {
     public static final String T_D_PASSWORD  = "PASSWORD";
     public static final String T_D_LATITUD  = "LATITUD";
     public static final String T_D_LONGITUD  = "LONGITUD";
+    //TABLA ESTADO DE DISPOSITIVOS
+    public static final String T_E_ID  = "_id";
+    public static final String T_E_ID_DISPOSITIVO  = "ID_DISPOSITIVO";
+    public static final String T_E_BATERIA  = "BATERIA";
+    public static final String T_E_GPS  = "GPS";
+    public static final String T_E_GSM  = "GSM";
+    public static final String T_E_ARM  = "ARM";
     //TABLA USUARIOS
     public static final String T_U_ID = "_id";
     public static final String T_U_USUARIO = "USUARIO";
@@ -53,6 +61,15 @@ public class HorusDB extends SQLiteOpenHelper {
             +T_D_LATITUD+" real, "
             +T_D_LONGITUD+" real "
             +");";
+    private static final String SQL_TABLA_ESTADO_DISPOSITIVOS = "create table "
+            +TABLA_ESTADO_DISPOSITIVOS+ "("
+            +T_E_ID+" integer primary key autoincrement, "
+            +T_E_BATERIA+" text, "
+            +T_E_GPS+" text, "
+            +T_E_GSM+" text, "
+            +T_E_ARM+" text"
+            +");";
+
     private static final String SQL_TABLA_USUARIOS = "create table "
             +TABLA_USUARIOS+ "("
             +T_U_ID+" integer primary key autoincrement, "
@@ -76,12 +93,14 @@ public class HorusDB extends SQLiteOpenHelper {
         db.execSQL(SQL_TABLA_DISPOSITIVOS);
         db.execSQL(SQL_TABLA_USUARIOS);
         db.execSQL(SQL_TABLA_ADMON);
+        db.execSQL(SQL_TABLA_ESTADO_DISPOSITIVOS);
         db.execSQL("INSERT INTO " + TABLA_USUARIOS+ "("+T_U_USUARIO+", "+T_U_PASSWORD+", "+T_U_NOMBRE+") VALUES ('horus', 'M0B1H0RU5','Horus User')");
     }
     public void onUpgrade(SQLiteDatabase db,int oldVersion, int newVersion){
         db.execSQL("DROP TABLE IF EXISTS "+TABLA_DISPOSITIVOS);
         db.execSQL("DROP TABLE IF EXISTS "+TABLA_ADMON);
         db.execSQL("DROP TABLE IF EXISTS "+TABLA_USUARIOS);
+        db.execSQL("DROP TABLE IF EXISTS "+TABLA_ESTADO_DISPOSITIVOS);
         onCreate(db);
     }
 }

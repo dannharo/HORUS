@@ -10,4 +10,89 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.app.mobi.horus.StatusDispositivoActivity">
 
+    <TextView
+        android:text="Bateria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="38dp"
+        android:id="@+id/textView12" />
+
+    <TextView
+        android:text="Gps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView12"
+        android:layout_alignLeft="@+id/textView12"
+        android:layout_alignStart="@+id/textView12"
+        android:layout_marginTop="69dp"
+        android:id="@+id/textView13" />
+
+    <TextView
+        android:text="Gsm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView13"
+        android:layout_alignLeft="@+id/textView13"
+        android:layout_alignStart="@+id/textView13"
+        android:layout_marginTop="59dp"
+        android:id="@+id/textView14" />
+
+    <TextView
+        android:text="Arm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView14"
+        android:layout_alignLeft="@+id/textView14"
+        android:layout_alignStart="@+id/textView14"
+        android:layout_marginTop="70dp"
+        android:id="@+id/textView15" />
+
+    <Button
+        android:text="Actualizar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView15"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:id="@+id/btnActualizaStatus" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView12"
+        android:layout_toRightOf="@+id/textView12"
+        android:layout_toEndOf="@+id/textView12"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:id="@+id/textBateria" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView14"
+        android:layout_alignRight="@+id/textBateria"
+        android:layout_alignEnd="@+id/textBateria"
+        android:id="@+id/textGps" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView14"
+        android:id="@+id/textGsm"
+        android:layout_alignTop="@+id/textView14"
+        android:layout_alignLeft="@+id/textGps"
+        android:layout_alignStart="@+id/textGps" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView15"
+        android:layout_alignLeft="@+id/textGsm"
+        android:layout_alignStart="@+id/textGsm"
+        android:id="@+id/textArm" />
 </RelativeLayout>
