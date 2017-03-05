@@ -72,9 +72,17 @@ public class DispositivoActivity extends AppCompatActivity {
                     final String telefono = noTelDisp.getText().toString();
                     final String password = passDisp.getText().toString();
                     final String imei = imeiDisp.getText().toString();
-                    dbmanager.insertDispositivo(nombre, telefono, imei, password, 0, 0);
-                    Intent main = new Intent(DispositivoActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(main);
+                     dbmanager.insertDispositivo(nombre, telefono, imei, password, 0, 0);
+                    //Intent main = new Intent(DispositivoActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    //startActivity(main);
+                    String idInserted = dbmanager.getLastId();
+                    //Inicia activity para agregar administrador
+                    Intent intentAdmin = new Intent(DispositivoActivity.this, AdministradorActivity.class);
+                    //Envia el id del dispositivo insertado
+                    intentAdmin.putExtra("idDisp",idInserted);
+                    intentAdmin.putExtra("lastActivity","Dispositivo");
+                    startActivityForResult(intentAdmin, 0);
+                    finish();
                 }
                 //Manda a llamar metodo de la clase mensaje
                 //Enva mensaje para iniciar el dispositivo

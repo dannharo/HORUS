@@ -19,6 +19,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
     private ListView lista;
     private String mensaje;
     Mensaje sms = new Mensaje(this);
+    private int idDisp = MenuDispositivoActivity._id;
     private String telefono = MenuDispositivoActivity.telGps;
     private String contrasena = MenuDispositivoActivity.contrasena;
 
@@ -30,7 +31,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
         if (activity.equals("mapa"))
         {
             //Array para almacenar las opciones del menu
-            opcionesConfiguracion=new String[7];
+            opcionesConfiguracion=new String[6];
             //Se agrega al array las opciones para el menu
             opcionesConfiguracion[0]="Cambiar contraseña";
             opcionesConfiguracion[1]="Administradores";
@@ -39,7 +40,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
             opcionesConfiguracion[4]="Desactivación por llave";
             opcionesConfiguracion[5]="Información";
             //Iconos del menu
-            iconOpcion = new Integer[7];
+            iconOpcion = new Integer[6];
             iconOpcion[0] =  R.drawable.ic_action_secure;
             iconOpcion[1] =  R.drawable.ic_action_person;
             iconOpcion[2] =  R.drawable.ic_action_alarms;
@@ -77,6 +78,9 @@ public class ConfiguracionActivity extends AppCompatActivity {
                     break;
                     case "Administradores":
                         Intent intentAdmin = new Intent(ConfiguracionActivity.this, ListAdminActivity.class);
+                        //Envia el id del dispositivo insertado
+                        intentAdmin.putExtra("idDisp",String.valueOf(idDisp));
+                        intentAdmin.putExtra("lastActivity","Dispositivo");
                         startActivity(intentAdmin);
                         break;
                     case "Alarmas":

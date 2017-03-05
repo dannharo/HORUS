@@ -50,15 +50,6 @@
         android:layout_alignRight="@+id/editNombre"
         android:layout_alignEnd="@+id/editNombre" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Guardar"
-        android:id="@+id/btnGuardaDisp"
-        android:layout_marginTop="48dp"
-        android:layout_below="@+id/textContrasena"
-        android:layout_centerHorizontal="true" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -97,6 +88,7 @@
         android:ems="10"
         android:layout_below="@+id/textView5"
         android:id="@+id/editIMEI"
+        android:maxLength="10"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
@@ -127,6 +119,16 @@
         android:layout_centerVertical="true"
         android:layout_margin="5dp"
         android:text="Button"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Siguiente"
+        android:id="@+id/btnGuardaDisp"
+        android:layout_marginTop="23dp"
+        android:layout_below="@+id/editContrasena"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
 </ScrollView>

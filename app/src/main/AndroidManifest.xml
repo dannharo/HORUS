@@ -34,7 +34,7 @@
             android:label="Nuevo dispositivo" />
         <activity
             android:name=".ContrasenaActivity"
-            android:label="Cambiar contraseña" />
+            android:label="Cambiar contraseña login" />
         <activity
             android:name=".AdministradorActivity"
             android:label="Nuevo administrador" />

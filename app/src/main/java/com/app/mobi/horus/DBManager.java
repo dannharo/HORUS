@@ -170,4 +170,15 @@ public class DBManager {
         cursor.close();
         return id;
     }
+    public String getLastId() {
+        String max_id="";
+        //Se obtiene el id del ultimo dispositivo insertado
+        Cursor c = database.query(HorusDB.TABLA_DISPOSITIVOS, new String[]{"MAX("+HorusDB.T_D_ID+")"}, null, null, null, null, null);
+        if(c.getCount()>0){
+            c.moveToFirst();
+            max_id=c.getString(0);
+        }
+        c.close();
+        return max_id;
+    }
 }
