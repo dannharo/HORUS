@@ -110,6 +110,29 @@ public class DBManager {
         int i = database.update(HorusDB.TABLA_DISPOSITIVOS, contentValue, HorusDB.T_D_ID + " = " + id, null);
         return i;
     }
+    public void updateEstadoDispositivo(int id, String bateria, String  gps, String  arm, String gsm){
+        ContentValues contentValue = new ContentValues();
+        contentValue.put(HorusDB.T_E_ID_DISPOSITIVO, id);
+        contentValue.put(HorusDB.T_E_BATERIA, bateria);
+        contentValue.put(HorusDB.T_E_GPS, gps);
+        contentValue.put(HorusDB.T_E_GSM, gsm);
+        contentValue.put(HorusDB.T_E_ARM, arm);
+        Cursor cursor=database.query(HorusDB.TABLA_ESTADO_DISPOSITIVOS, null,HorusDB.T_E_ID_DISPOSITIVO+ " =?", new String[]{ String.valueOf(id)}, null, null, null);
+        if(cursor.getCount()<1)
+        {
+            //Inserta el registro
+            database.insert(HorusDB.TABLA_ESTADO_DISPOSITIVOS, null, contentValue);
+        }
+        else
+        {
+            //Actualiza el registro
+            database.update(HorusDB.TABLA_ESTADO_DISPOSITIVOS, contentValue, HorusDB.T_E_ID_DISPOSITIVO + " = " + id, null);
+        }
+
+       // long i =database.insertWithOnConflict(HorusDB.TABLA_DISPOSITIVOS, null, contentValue, SQLiteDatabase.CONFLICT_REPLACE);
+                //database.update(HorusDB.TABLA_ESTADO_DISPOSITIVOS, contentValue, HorusDB.T_E_ID_DISPOSITIVO + " = " + id, null);
+        cursor.close();
+    }
     public int updateUsuarios(int id, String password){
         ContentValues contentValue = new ContentValues();
         contentValue.put(HorusDB.T_U_PASSWORD,password);

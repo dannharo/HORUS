@@ -46,7 +46,7 @@ public class HorusDB extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "horus_devices.db";
 
     // Database Version
-    public static final int DATABASE_VERSION = 6;
+    public static final int DATABASE_VERSION = 8;
 
     // Creating tables query
     private static final String SQL_TABLA_DISPOSITIVOS = "create table "
@@ -64,6 +64,7 @@ public class HorusDB extends SQLiteOpenHelper {
     private static final String SQL_TABLA_ESTADO_DISPOSITIVOS = "create table "
             +TABLA_ESTADO_DISPOSITIVOS+ "("
             +T_E_ID+" integer primary key autoincrement, "
+            +T_E_ID_DISPOSITIVO+" integer, "
             +T_E_BATERIA+" text, "
             +T_E_GPS+" text, "
             +T_E_GSM+" text, "
