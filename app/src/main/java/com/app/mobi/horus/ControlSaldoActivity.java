@@ -8,12 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.SQLException;
 
 public class ControlSaldoActivity extends AppCompatActivity {
     private int _id = MenuDispositivoActivity._id;
-    String saldoActual, stringTotalSaldo, stringCostoSms;
+    String saldoActual="0.0", stringTotalSaldo, stringCostoSms;
     TextView textTotalSaldo;
     Button btnGuardar;
     EditText editSaldoIngresado, editCostoSms;
@@ -38,13 +39,13 @@ public class ControlSaldoActivity extends AppCompatActivity {
                 //Almacena en las variables la información
                 saldoActual = cursor.getString(cursor.getColumnIndex(HorusDB.T_S_SALDO));
                 stringCostoSms = cursor.getString(cursor.getColumnIndex(HorusDB.T_S_COSTO_SMS));
-                //Muestra la información
-                textTotalSaldo.setText(saldoActual);
-                editCostoSms.setText(stringCostoSms);
                 cursor.moveToNext();
             }
         }
         cursor.close();
+        //Muestra la información
+        textTotalSaldo.setText("$"+saldoActual);
+        editCostoSms.setText(stringCostoSms);
         editSaldoIngresado = (EditText)findViewById(R.id.editSaldoIngresado);
 
         btnGuardar =(Button) findViewById(R.id.btnGuardaSaldo);
@@ -56,18 +57,19 @@ public class ControlSaldoActivity extends AppCompatActivity {
                 stringTotalSaldo = editSaldoIngresado.getText().toString();
 
                 //Se valida que ningun campo este vacio
-                if (TextUtils.isEmpty(stringCostoSms)) {
-                    editCostoSms.setError("El campo es obligatorio");
-                    return;
-                } else if (TextUtils.isEmpty(stringTotalSaldo)) {
+                 if (TextUtils.isEmpty(stringTotalSaldo)) {
                     editSaldoIngresado.setError("El campo es obligatorio");
                     return;
-                }  else {
-                    Integer saldoIngresado = Integer.parseInt(stringTotalSaldo);
-                    Integer costoSms =Integer.parseInt(stringCostoSms);
-                    Integer saldoTotal = Integer.parseInt(saldoActual)+ saldoIngresado;
+                }
+                else if (TextUtils.isEmpty(stringCostoSms)) {
+                    editCostoSms.setError("El campo es obligatorio");
+                    return;
+                }else {
+                    Float saldoIngresado = Float.parseFloat(stringTotalSaldo);
+                    Float costoSms =Float.parseFloat(stringCostoSms);
+                    Float saldoTotal = Float.parseFloat(saldoActual)+ saldoIngresado;
                     dbManager.updateSaldoDispositivo(_id, saldoTotal, costoSms);
-                    textTotalSaldo.setText(saldoTotal);
+                    textTotalSaldo.setText(String.valueOf(saldoTotal));
                 }
 
 

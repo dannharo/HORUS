@@ -33,6 +33,7 @@ public class ReceiveSms extends BroadcastReceiver {
     String longitud = "";
     private DBManager dbManager;
     public static ArrayList<String> telefonosGps = new ArrayList<String>();
+    public static ArrayList<String> idsGps = new ArrayList<String>();
     @Override
     public void onReceive(Context context, Intent intent) {
         //Se obtienen los numeros de telefono de todos los gps dados de alta en la app
@@ -47,6 +48,7 @@ public class ReceiveSms extends BroadcastReceiver {
             while(!cursor.isAfterLast()){
                 //Almacena en las variables la información
                 telefonosGps.add(cursor.getString(cursor.getColumnIndex(HorusDB.T_D_NUMERO)));
+                idsGps.add(cursor.getString(cursor.getColumnIndex(HorusDB.T_D_ID)));
                 cursor.moveToNext();
             }
         }
@@ -67,6 +69,24 @@ public class ReceiveSms extends BroadcastReceiver {
              for (int i = 0; i < telefonosGps.size(); i++) {
                  //Si el mensaje pertenece a uno de los numeros del gps, se muestra el mapa
                  if (originNumber.equals(telefonosGps.get(i))) {
+                     //Se obtiene el saldo actual del dispotitivo
+                     Integer id = Integer.parseInt(idsGps.get(i));
+                     Float saldoActual;
+                     Float smsCosto;
+                     Cursor c = dbManager.fetchSaldo(id);
+                     if(c.moveToFirst()){
+                         while(!c.isAfterLast()){
+                             //Almacena en las variables la información
+                             String stringSaldoActual = c.getString(c.getColumnIndex(HorusDB.T_S_SALDO));
+                             String stringSmsCosto = c.getString(c.getColumnIndex(HorusDB.T_S_COSTO_SMS));
+                             saldoActual= Float.parseFloat(stringSaldoActual);
+                             smsCosto = Float.parseFloat(stringSmsCosto);
+                             saldoActual = saldoActual-smsCosto;
+                             //Actualiza el saldo actual
+                             dbManager.updateSaldoDispositivo(id,saldoActual);
+                             c.moveToNext();
+                         }
+                     }
                      //Toast.makeText(context, smsBody, Toast.LENGTH_LONG).show();
                      //Se verifica que sea un mensaje de sensor alarma
                      if (smsBody.contains("sensor alarm!")) {

@@ -100,7 +100,7 @@ public class DBManager {
         }
         return cursor;
     }
-    public void updateSaldoDispositivo(int id, Integer saldoActual, Integer smsCosto){
+    public void updateSaldoDispositivo(int id, Float saldoActual, Float smsCosto){
         ContentValues contentValue = new ContentValues();
         contentValue.put(HorusDB.T_S_ID_DISPOSITIVO, id);
         contentValue.put(HorusDB.T_S_SALDO, saldoActual);
@@ -118,7 +118,7 @@ public class DBManager {
         }
         cursor.close();
     }
-    public int updateSaldoDispositivo(int id, Integer saldoActual){
+    public int updateSaldoDispositivo(int id, Float saldoActual){
         ContentValues contentValue = new ContentValues();
         contentValue.put(HorusDB.T_S_ID_DISPOSITIVO, id);
         contentValue.put(HorusDB.T_S_SALDO, saldoActual);
