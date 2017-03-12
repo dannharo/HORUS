@@ -61,7 +61,7 @@ public class DBManager {
     }
     public  Cursor fetchDispositivo(int _id){
         String[] columns = new String[]{HorusDB.T_D_ID,HorusDB.T_D_NOMBRE,HorusDB.T_D_NUMERO,HorusDB.T_D_IMEI,HorusDB.T_D_PASSWORD,HorusDB.T_D_LATITUD,
-                HorusDB.T_D_LONGITUD, HorusDB.T_D_ALARMA_MOVIMIENTO, HorusDB.T_D_ALARMA_BATERIA };
+                HorusDB.T_D_LONGITUD, HorusDB.T_D_ALARMA_MOVIMIENTO, HorusDB.T_D_ALARMA_BATERIA, HorusDB.T_D_VECES_DESARMAR, HorusDB.T_D_NUMERO_INTENTOS };
         Cursor cursor =  database.query(HorusDB.TABLA_DISPOSITIVOS,columns, HorusDB.T_D_ID+" = "+_id,null,null,null,null);
         if(cursor != null){
             cursor.moveToFirst();
@@ -92,6 +92,39 @@ public class DBManager {
         }
         return cursor;
     }
+    public Cursor fetchSaldo(int _id){
+        String[] columns = new String[]{HorusDB.T_S_SALDO,HorusDB.T_S_COSTO_SMS};
+        Cursor cursor = database.query(HorusDB.TABLA_SALDO_DISPOSITIVO,columns,HorusDB.T_A_ID_DISPOSITIVO+" = "+_id,null,null,null,null);
+        if (cursor != null){
+            cursor.moveToFirst();
+        }
+        return cursor;
+    }
+    public void updateSaldoDispositivo(int id, Integer saldoActual, Integer smsCosto){
+        ContentValues contentValue = new ContentValues();
+        contentValue.put(HorusDB.T_S_ID_DISPOSITIVO, id);
+        contentValue.put(HorusDB.T_S_SALDO, saldoActual);
+        contentValue.put(HorusDB.T_S_COSTO_SMS, smsCosto);
+        Cursor cursor=database.query(HorusDB.TABLA_SALDO_DISPOSITIVO, null,HorusDB.T_S_ID_DISPOSITIVO+ " =?", new String[]{ String.valueOf(id)}, null, null, null);
+        if(cursor.getCount()<1)
+        {
+            //Inserta el registro
+            database.insert(HorusDB.TABLA_SALDO_DISPOSITIVO, null, contentValue);
+        }
+        else
+        {
+            //Actualiza el registro
+            database.update(HorusDB.TABLA_SALDO_DISPOSITIVO, contentValue, HorusDB.T_S_ID_DISPOSITIVO + " = " + id, null);
+        }
+        cursor.close();
+    }
+    public int updateSaldoDispositivo(int id, Integer saldoActual){
+        ContentValues contentValue = new ContentValues();
+        contentValue.put(HorusDB.T_S_ID_DISPOSITIVO, id);
+        contentValue.put(HorusDB.T_S_SALDO, saldoActual);
+        int i = database.update(HorusDB.TABLA_SALDO_DISPOSITIVO, contentValue, HorusDB.T_S_ID_DISPOSITIVO + " = " + id, null);
+        return i;
+    }
     public Cursor fetchAdministrador(int id){
         String[] columns = new String[]{HorusDB.T_A_ID,HorusDB.T_A_ID_DISPOSITIVO,HorusDB.T_A_NOMBRE,HorusDB.T_A_NUMERO};
         Cursor cursor = database.query(HorusDB.TABLA_ADMON,columns,HorusDB.T_A_ID+" = "+id,null,null,null,null);
@@ -107,6 +140,14 @@ public class DBManager {
         contentValue.put(HorusDB.T_D_NUMERO,numero);
         contentValue.put(HorusDB.T_D_PASSWORD,password);
         contentValue.put(HorusDB.T_D_IMEI,imei);
+        int i = database.update(HorusDB.TABLA_DISPOSITIVOS, contentValue, HorusDB.T_D_ID + " = " + id, null);
+        return i;
+    }
+    public int updateLlaveDispositivo(int id, Integer noVeces, Integer noIntentos){
+        ContentValues contentValue = new ContentValues();
+        contentValue.put(HorusDB.T_D_ID,id);
+        contentValue.put(HorusDB.T_D_VECES_DESARMAR, noVeces);
+        contentValue.put(HorusDB.T_D_NUMERO_INTENTOS, noIntentos);
         int i = database.update(HorusDB.TABLA_DISPOSITIVOS, contentValue, HorusDB.T_D_ID + " = " + id, null);
         return i;
     }

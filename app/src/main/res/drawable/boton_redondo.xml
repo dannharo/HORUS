@@ -3,11 +3,4 @@
     <size android:width="50dp"        android:height="50dp"></size>
     <corners android:radius="9dp"></corners>
     <solid android:color="#4dc3ff"></solid>
-    <item
-        android:state_focused="true"
-        android:state_pressed="true" />
-
-    <item
-        android:state_focused="false"
-        android:state_pressed="true" />
 </shape>

@@ -102,6 +102,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
                         break;
                     case "Desactivación por llave":
                         Intent intent = new Intent(ConfiguracionActivity.this, DesactivacionLlaveActivity.class);
+                        intent.putExtra("id_device",String.valueOf(idDisp));
                         startActivity(intent);
                         break;
                 }

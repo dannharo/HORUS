@@ -47,6 +47,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/editTelAdminDet"
         android:inputType="phone"
+        android:maxLength="10"
         android:layout_below="@+id/editNombreAdminDet"
         android:layout_marginTop="82dp"
         android:layout_alignParentLeft="true"

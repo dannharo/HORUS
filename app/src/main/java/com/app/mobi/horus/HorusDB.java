@@ -12,6 +12,7 @@ public class HorusDB extends SQLiteOpenHelper {
     public static final String TABLA_USUARIOS = "USUARIOS";
     public static final String TABLA_ADMON = "ADMINISTRADORES";
     public static final String TABLA_ESTADO_DISPOSITIVOS = "ESTADO_DISPOSITIVOS";
+    public static final String TABLA_SALDO_DISPOSITIVO = "SALDO_DISPOSITIVO";
 
     // tables columns
     //TABLA DE DISPOSITIVOS
@@ -24,6 +25,8 @@ public class HorusDB extends SQLiteOpenHelper {
     public static final String T_D_PASSWORD  = "PASSWORD";
     public static final String T_D_LATITUD  = "LATITUD";
     public static final String T_D_LONGITUD  = "LONGITUD";
+    public static final String T_D_VECES_DESARMAR = "VECES_DESARM";
+    public static final String T_D_NUMERO_INTENTOS  = "NO_INTENTOS";
     //TABLA ESTADO DE DISPOSITIVOS
     public static final String T_E_ID  = "_id";
     public static final String T_E_ID_DISPOSITIVO  = "ID_DISPOSITIVO";
@@ -31,6 +34,11 @@ public class HorusDB extends SQLiteOpenHelper {
     public static final String T_E_GPS  = "GPS";
     public static final String T_E_GSM  = "GSM";
     public static final String T_E_ARM  = "ARM";
+    //TABLA SALDO DISPOSITIVO
+    public static final String T_S_ID  = "_id";
+    public static final String T_S_ID_DISPOSITIVO  = "ID_DISPOSITIVO";
+    public static final String T_S_SALDO  = "SALDO";
+    public static final String T_S_COSTO_SMS  = "COSTO_SMS";
     //TABLA USUARIOS
     public static final String T_U_ID = "_id";
     public static final String T_U_USUARIO = "USUARIO";
@@ -46,7 +54,7 @@ public class HorusDB extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "horus_devices.db";
 
     // Database Version
-    public static final int DATABASE_VERSION = 8;
+    public static final int DATABASE_VERSION = 10;
 
     // Creating tables query
     private static final String SQL_TABLA_DISPOSITIVOS = "create table "
@@ -59,7 +67,9 @@ public class HorusDB extends SQLiteOpenHelper {
             +T_D_ALARMA_BATERIA+" integer, "
             +T_D_ALARMA_MOVIMIENTO+" integer, "
             +T_D_LATITUD+" real, "
-            +T_D_LONGITUD+" real "
+            +T_D_LONGITUD+" real, "
+            +T_D_VECES_DESARMAR+" integer, "
+            +T_D_NUMERO_INTENTOS+" integer "
             +");";
     private static final String SQL_TABLA_ESTADO_DISPOSITIVOS = "create table "
             +TABLA_ESTADO_DISPOSITIVOS+ "("
@@ -69,6 +79,13 @@ public class HorusDB extends SQLiteOpenHelper {
             +T_E_GPS+" text, "
             +T_E_GSM+" text, "
             +T_E_ARM+" text"
+            +");";
+    private static final String SQL_TABLA_SALDO_DISPOSITIVO = "create table "
+            +TABLA_SALDO_DISPOSITIVO+ "("
+            +T_E_ID+" integer primary key autoincrement, "
+            +T_E_ID_DISPOSITIVO+" integer, "
+            +T_S_SALDO+" integer, "
+            +T_S_COSTO_SMS+" real "
             +");";
 
     private static final String SQL_TABLA_USUARIOS = "create table "
@@ -95,6 +112,7 @@ public class HorusDB extends SQLiteOpenHelper {
         db.execSQL(SQL_TABLA_USUARIOS);
         db.execSQL(SQL_TABLA_ADMON);
         db.execSQL(SQL_TABLA_ESTADO_DISPOSITIVOS);
+        db.execSQL(SQL_TABLA_SALDO_DISPOSITIVO);
         db.execSQL("INSERT INTO " + TABLA_USUARIOS+ "("+T_U_USUARIO+", "+T_U_PASSWORD+", "+T_U_NOMBRE+") VALUES ('horus', 'M0B1H0RU5','Horus User')");
     }
     public void onUpgrade(SQLiteDatabase db,int oldVersion, int newVersion){
@@ -102,6 +120,7 @@ public class HorusDB extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+TABLA_ADMON);
         db.execSQL("DROP TABLE IF EXISTS "+TABLA_USUARIOS);
         db.execSQL("DROP TABLE IF EXISTS "+TABLA_ESTADO_DISPOSITIVOS);
+        db.execSQL("DROP TABLE IF EXISTS "+TABLA_SALDO_DISPOSITIVO);
         onCreate(db);
     }
 }
