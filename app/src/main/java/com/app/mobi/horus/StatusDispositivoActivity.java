@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +18,8 @@ import java.sql.SQLException;
 
 public class StatusDispositivoActivity extends AppCompatActivity {
 
-    TextView bateria, gps, gsm, arm;
+    TextView bateria, gps, gsm, arm, mensajeActualizar;
+    ImageView imgBateria, imgGps, imgGsm, imgArm;
     Button btnActualizar;
     Mensaje sms = new Mensaje(this);
     private int _id = MenuDispositivoActivity._id;
@@ -27,11 +29,24 @@ public class StatusDispositivoActivity extends AppCompatActivity {
     private String infoBateria, infoGps, infoGsm, infoArm;
     private DBManager dbManager;
     BroadcastReceiver receiver = null;
+    private boolean banderaEstatus = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_status_dispositivo);
+
+        mensajeActualizar = (TextView)findViewById(R.id.textMensajeActualizar);
+        bateria = (TextView)findViewById(R.id.textPorcenBateria);
+        gps = (TextView)findViewById(R.id.textStatusGps);
+        gsm = (TextView)findViewById(R.id.textStatusGsm);
+        arm = (TextView)findViewById(R.id.textStatusArm);
+
+        //ImageView
+        imgBateria = (ImageView)findViewById(R.id.imgBateria);
+        imgGps = (ImageView)findViewById(R.id.imgGps);
+        imgGsm = (ImageView)findViewById(R.id.imgGsm);
+        imgArm = (ImageView)findViewById(R.id.imgArm);
 
         //Obtiene los datos actuales almacenados en la bd
         dbManager = new DBManager(this);
@@ -42,6 +57,7 @@ public class StatusDispositivoActivity extends AppCompatActivity {
         }
         Cursor cursor = dbManager.fetchEstadoDispositivo(_id);
         if(cursor.moveToFirst()){
+            mensajeActualizar.setText("");
             while(!cursor.isAfterLast()){
                 //Almacena en las variables la información
                 infoArm = cursor.getString(cursor.getColumnIndex(HorusDB.T_E_ARM));
@@ -50,20 +66,15 @@ public class StatusDispositivoActivity extends AppCompatActivity {
                 infoBateria = cursor.getString(cursor.getColumnIndex(HorusDB.T_E_BATERIA));
                 cursor.moveToNext();
             }
+            muestraValores(infoArm, infoGps, infoBateria, infoGsm);
+        }
+        else
+        {
+           mensajeActualizar.setText("La información no esta actualizada.\n De click en el botón.");
         }
         cursor.close();
 
-        bateria = (TextView)findViewById(R.id.textBateria);
-        gps = (TextView)findViewById(R.id.textGps);
-        gsm = (TextView)findViewById(R.id.textGsm);
-        arm = (TextView)findViewById(R.id.textArm);
-        //Muestra en las etiquetas los valores
-        bateria.setText(infoBateria);
-        gps.setText(infoGps);
-        arm.setText(infoArm);
-        gsm.setText(infoGsm);
-
-        btnActualizar =(Button) findViewById(R.id.btnActualizaStatus);
+       btnActualizar =(Button) findViewById(R.id.btnActualizaStatus);
         btnActualizar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //Envia mensaje para obtener el status del dispositivo
@@ -87,6 +98,74 @@ public class StatusDispositivoActivity extends AppCompatActivity {
         super.onDestroy();
         unregisterReceiver(receiver);
     }
+
+    public void muestraValores(String infoArm, String infoGps, String infoBateria, String infoGsm)
+    {
+        //Muestra en las etiquetas los valores
+        bateria.setText(infoBateria);
+        gsm.setText(infoGsm);
+        //Muestra el icono que corresponda
+        if(infoBateria.equals("100%"))
+        {
+            imgGps.setImageResource(0);
+            imgBateria.setBackgroundResource(R.drawable.full_battery);
+        }
+        else if(infoBateria.equals("75%"))
+        {
+            imgGps.setImageResource(0);
+            imgBateria.setBackgroundResource(R.drawable.charged_battery);
+        }
+        else if(infoBateria.equals("50%"))
+        {
+            imgGps.setImageResource(0);
+            imgBateria.setBackgroundResource(R.drawable.half_battery);
+        }
+        else if(infoBateria.equals("25%"))
+        {
+            imgGps.setImageResource(0);
+            imgBateria.setBackgroundResource(R.drawable.full_battery);
+        }
+        else if(infoBateria.equals("15%"))
+        {
+            imgGps.setImageResource(0);
+            imgBateria.setBackgroundResource(R.drawable.low_battery);
+        }
+        else if(infoBateria.equals("5%"))
+        {
+            imgGps.setImageResource(0);
+            imgBateria.setBackgroundResource(R.drawable.empty_battery);
+        }
+        else
+        {
+            imgGps.setImageResource(0);
+            imgBateria.setBackgroundResource(R.drawable.charged_battery);
+        }
+        if(infoGps.equals("ON"))
+        {
+            imgGps.setImageResource(0);
+            imgGps.setBackgroundResource(R.drawable.marker_on);
+            gps.setText("Activado");
+        }
+        else
+        {
+            imgGps.setImageResource(0);
+            imgGps.setBackgroundResource(R.drawable.marker_off);
+            gps.setText("Desactivado");
+        }
+        if(infoArm.equals("ON"))
+        {
+            imgArm.setImageResource(0);
+            imgArm.setBackgroundResource(R.drawable.lock);
+            arm.setText("Armado");
+        }
+        else
+        {
+            imgArm.setImageResource(0);
+            imgArm.setBackgroundResource(R.drawable.unlock);
+            arm.setText("Desarmado");
+        }
+    }
+
     public String processReceive(Context context, Intent intent)
     {
         Bundle bundle = intent.getExtras();
@@ -107,10 +186,7 @@ public class StatusDispositivoActivity extends AppCompatActivity {
                     String statusBateria= infoSms[1].replace("GPRS", "");
                     String statusGps = infoSms[3].replace("GSM", "");
                     String statusGsm = infoSms[4].replace("APN", "");
-                    bateria.setText(statusBateria);
-                    gps.setText(statusGps);
-                    arm.setText(infoSms[8]);
-                    gsm.setText(statusGsm);
+                    muestraValores(statusArm, statusGps, statusBateria, statusGsm);
                     //Guarda los valores en la tabla
                     dbManager.updateEstadoDispositivo(_id, statusBateria, statusGps, statusArm, statusGsm);
                 }
