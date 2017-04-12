@@ -17,4 +17,11 @@
         android:textColor="@color/white"
 
         />
+    <ImageView
+        android:id="@+id/imgListDips"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/lock"
+        android:layout_toLeftOf="@+id/lvnombre"
+        />
 </RelativeLayout>

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.media.MediaPlayer;
@@ -24,6 +25,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -107,6 +109,19 @@ public class MainActivity extends AppCompatActivity {
         listview = (ListView) findViewById(R.id.listDispositivos);
         listview.setEmptyView(findViewById(R.id.empty));
         adapter = new SimpleCursorAdapter(this,R.layout.list_dispositivos,cursor,from,to,0);
+       /* adapter.setViewBinder(new SimpleCursorAdapter.ViewBinder(){
+            //Binds the Cursor column defined by the specified index to the specified view
+            public boolean setViewValue(View view, Cursor cursor, int columnIndex){
+                R.id.i.setBackgroundResource(R.drawable.marker_on);
+                ((ImageView)view).setImageResource(R.drawable.lock);
+                if(view.getId() == R.id.imgListDips){
+                    //...
+                    ((ImageView)view).setImageResource(R.drawable.lock);
+                    return true; //true because the data was bound to the view
+                }
+                return false;
+            }
+        });*/
         adapter.notifyDataSetChanged();
         listview.setAdapter(adapter);
         //Muestra el botón flotante para agreagar un nuevo dispositivo

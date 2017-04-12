@@ -107,40 +107,40 @@ public class StatusDispositivoActivity extends AppCompatActivity {
         //Muestra el icono que corresponda
         if(infoBateria.equals("100%"))
         {
-            imgGps.setImageResource(0);
+            imgBateria.setImageResource(0);
             imgBateria.setBackgroundResource(R.drawable.full_battery);
         }
         else if(infoBateria.equals("75%"))
         {
-            imgGps.setImageResource(0);
+            imgBateria.setImageResource(0);
             imgBateria.setBackgroundResource(R.drawable.charged_battery);
         }
         else if(infoBateria.equals("50%"))
         {
-            imgGps.setImageResource(0);
+            imgBateria.setImageResource(0);
             imgBateria.setBackgroundResource(R.drawable.half_battery);
         }
         else if(infoBateria.equals("25%"))
         {
-            imgGps.setImageResource(0);
+            imgBateria.setImageResource(0);
             imgBateria.setBackgroundResource(R.drawable.full_battery);
         }
         else if(infoBateria.equals("15%"))
         {
-            imgGps.setImageResource(0);
+            imgBateria.setImageResource(0);
             imgBateria.setBackgroundResource(R.drawable.low_battery);
         }
         else if(infoBateria.equals("5%"))
         {
-            imgGps.setImageResource(0);
+            imgBateria.setImageResource(0);
             imgBateria.setBackgroundResource(R.drawable.empty_battery);
         }
         else
         {
-            imgGps.setImageResource(0);
+            imgBateria.setImageResource(0);
             imgBateria.setBackgroundResource(R.drawable.charged_battery);
         }
-        if(infoGps.equals("ON"))
+        if(infoGps.trim().equals("ON"))
         {
             imgGps.setImageResource(0);
             imgGps.setBackgroundResource(R.drawable.marker_on);
@@ -152,7 +152,8 @@ public class StatusDispositivoActivity extends AppCompatActivity {
             imgGps.setBackgroundResource(R.drawable.marker_off);
             gps.setText("Desactivado");
         }
-        if(infoArm.equals("ON"))
+
+        if(infoArm.trim().equals("ON"))
         {
             imgArm.setImageResource(0);
             imgArm.setBackgroundResource(R.drawable.lock);

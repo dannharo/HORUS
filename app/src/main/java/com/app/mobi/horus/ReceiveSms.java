@@ -82,6 +82,7 @@ public class ReceiveSms extends BroadcastReceiver {
                              saldoActual= Float.parseFloat(stringSaldoActual);
                              smsCosto = Float.parseFloat(stringSmsCosto);
                              saldoActual = saldoActual-smsCosto;
+                             saldoActual= (saldoActual < 0 )? 0 : saldoActual;
                              //Actualiza el saldo actual
                              dbManager.updateSaldoDispositivo(id,saldoActual);
                              c.moveToNext();
